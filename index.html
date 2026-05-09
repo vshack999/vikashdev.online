@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Dev Portfolio | Ultra Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--neon-blue:#00d4ff;--neon-purple:#b400ff;--neon-pink:#ff006e;
+--glass:rgba(255,255,255,0.05);--glass2:rgba(255,255,255,0.08);
+--dark:#020010;--dark2:#06001a;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--dark);color:#fff;
+font-family:'Rajdhani',sans-serif;
+overflow-x:hidden;cursor:none;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#020010}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon-blue),var(--neon-purple));border-radius:2px}
+
+/* SCROLL PROGRESS */
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple),var(--neon-pink));z-index:9999;width:0%;transition:width 0.1s;box-shadow:0 0 10px var(--neon-blue)}
+
+/* CUSTOM CURSOR */
+#cursor{position:fixed;width:20px;height:20px;border:2px solid var(--neon-blue);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.2s,height 0.2s,border-color 0.2s;mix-blend-mode:screen}
+#cursor-dot{position:fixed;width:6px;height:6px;background:var(--neon-blue);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--neon-blue)}
+#cursor-trail{position:fixed;pointer-events:none;z-index:9997}
+.trail-dot{position:absolute;width:4px;height:4px;border-radius:50%;transform:translate(-50%,-50%);opacity:0;animation:trailFade 0.6s ease forwards}
+@keyframes trailFade{0%{opacity:0.8;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(0)}}
+@media(max-width:768px){#cursor,#cursor-dot{display:none}body{cursor:auto}}
+
+/* BACKGROUND */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.glow-blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.15;pointer-events:none;z-index:0;animation:blobMove 8s ease-in-out infinite alternate}
+#blob1{width:400px;height:400px;background:var(--neon-blue);top:-100px;left:-100px;animation-delay:0s}
+#blob2{width:350px;height:350px;background:var(--neon-purple);bottom:-100px;right:-50px;animation-delay:-3s}
+#blob3{width:300px;height:300px;background:var(--neon-pink);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-6s}
+@keyframes blobMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,30px) scale(1.1)}}
+
+/* GRID */
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:50px 50px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{background-position:0 0}100%{background-position:50px 50px}}
+
+/* NAVBAR */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:15px 30px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,0,16,0.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.1);transition:all 0.3s}
+nav.scrolled{background:rgba(2,0,16,0.95);box-shadow:0 0 30px rgba(0,212,255,0.1)}
+.nav-logo{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;letter-spacing:2px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;letter-spacing:2px;text-transform:uppercase;position:relative;transition:color 0.3s;font-family:'Orbitron',monospace}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple));transition:width 0.3s;box-shadow:0 0 8px var(--neon-blue)}
+.nav-links a:hover{color:var(--neon-blue)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--neon-blue)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.hamburger span{width:25px;height:2px;background:var(--neon-blue);transition:all 0.3s;border-radius:2px;box-shadow:0 0 8px var(--neon-blue)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(2,0,16,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:40px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:#fff;text-decoration:none;font-family:'Orbitron',monospace;font-size:1.5rem;letter-spacing:4px;text-transform:uppercase;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--neon-blue)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}}
+
+/* SECTIONS */
+section{position:relative;z-index:1}
+
+/* HERO */
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;gap:30px}
+
+/* PROFILE IMAGE */
+.profile-wrap{position:relative;width:160px;height:160px;margin:0 auto}
+.profile-rings{position:absolute;inset:-20px;border-radius:50%;animation:rotate 4s linear infinite}
+.profile-rings::before,.profile-rings::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+.profile-rings::before{border-top-color:var(--neon-blue);border-right-color:var(--neon-purple);animation:rotate 3s linear infinite;box-shadow:0 0 20px var(--neon-blue)}
+.profile-rings::after{border-bottom-color:var(--neon-pink);border-left-color:var(--neon-blue);animation:rotate 5s linear infinite reverse;inset:-8px;box-shadow:0 0 20px var(--neon-purple)}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.profile-img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid var(--neon-blue);box-shadow:0 0 40px rgba(0,212,255,0.4),0 0 80px rgba(180,0,255,0.2);animation:float 3s ease-in-out infinite;position:relative;z-index:2;transition:transform 0.3s}
+.profile-img:hover{transform:scale(1.05)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.profile-glow{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.15),transparent 70%);animation:pulse2 2s ease-in-out infinite}
+@keyframes pulse2{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+/* HERO TEXT */
+.hero-greeting{font-family:'Orbitron',monospace;font-size:0.8rem;letter-spacing:6px;color:var(--neon-blue);text-transform:uppercase;opacity:0.8}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2rem,6vw,4rem);font-weight:900;background:linear-gradient(135deg,#fff 30%,var(--neon-blue) 60%,var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;text-shadow:none}
+.typing-wrap{font-family:'Rajdhani',sans-serif;font-size:clamp(1rem,3vw,1.5rem);color:var(--neon-blue);height:40px;display:flex;align-items:center;justify-content:center;gap:8px}
+.typing-prefix{color:rgba(255,255,255,0.5)}
+#typed-text{color:var(--neon-blue);border-right:2px solid var(--neon-blue);padding-right:4px;animation:blink-cursor 0.7s step-end infinite}
+@keyframes blink-cursor{0%,100%{border-color:var(--neon-blue)}50%{border-color:transparent}}
+.hero-bio{max-width:500px;color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.7;letter-spacing:0.5px}
+
+/* HERO BUTTONS */
+.hero-btns{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:10px}
+.btn{position:relative;padding:12px 28px;border-radius:8px;font-family:'Orbitron',monospace;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;overflow:hidden;transition:all 0.3s;display:inline-block}
+.btn-primary{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:#fff;box-shadow:0 0 20px rgba(0,212,255,0.4)}
+.btn-outline{background:transparent;color:var(--neon-blue);border:1px solid var(--neon-blue);box-shadow:0 0 15px rgba(0,212,255,0.2)}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.4s}
+.btn:hover::before{left:100%}
+.btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 30px rgba(0,212,255,0.4)}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,212,255,0.6),0 10px 30px rgba(180,0,255,0.4)}
+.btn-outline:hover{background:rgba(0,212,255,0.1)}
+
+/* SOCIAL ICONS */
+.social-row{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.social-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);text-decoration:none;transition:all 0.3s;position:relative;overflow:hidden;animation:socialFloat 3s ease-in-out infinite}
+.social-icon:nth-child(1){animation-delay:0s}
+.social-icon:nth-child(2){animation-delay:0.3s}
+.social-icon:nth-child(3){animation-delay:0.6s}
+.social-icon:nth-child(4){animation-delay:0.9s}
+.social-icon:nth-child(5){animation-delay:1.2s}
+@keyframes socialFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.social-icon svg{width:22px;height:22px;transition:all 0.3s;z-index:1;position:relative}
+.social-icon::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));opacity:0;transition:opacity 0.3s}
+.social-icon:hover::before{opacity:1}
+.social-icon:hover{transform:translateY(-8px) scale(1.1) rotateX(10deg);box-shadow:0 15px 40px rgba(0,212,255,0.4);border-color:var(--neon-blue)}
+.social-icon:hover svg{transform:scale(1.2)}
+.si-ig svg{fill:#E1306C}
+.si-wa svg{fill:#25D366}
+.si-tg svg{fill:#2CA5E0}
+.si-yt svg{fill:#FF0000}
+.si-gh svg{fill:#fff}
+.social-icon:hover svg{fill:#fff}
+
+/* SECTION COMMON */
+.section-pad{padding:80px 20px}
+.section-title{text-align:center;margin-bottom:60px}
+.section-title h2{font-family:'Orbitron',monospace;font-size:clamp(1.5rem,4vw,2.5rem);font-weight:900;background:linear-gradient(135deg,#fff,var(--neon-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.section-title p{color:rgba(255,255,255,0.5);font-size:0.9rem;letter-spacing:2px}
+.section-title .title-line{width:80px;height:2px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple));margin:15px auto;border-radius:2px;box-shadow:0 0 10px var(--neon-blue)}
+
+/* ABOUT */
+#about{background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 100%)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;margin:0 auto;align-items:center}
+.about-text h3{font-family:'Orbitron',monospace;font-size:1.2rem;color:var(--neon-blue);margin-bottom:15px}
+.about-text p{color:rgba(255,255,255,0.7);line-height:1.8;margin-bottom:15px;font-size:0.95rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.skill-tag{padding:6px 14px;border-radius:20px;border:1px solid rgba(0,212,255,0.3);font-size:0.75rem;color:var(--neon-blue);letter-spacing:1px;background:rgba(0,212,255,0.05);transition:all 0.3s}
+.skill-tag:hover{background:rgba(0,212,255,0.15);box-shadow:0 0 15px rgba(0,212,255,0.3)}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.stat-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:20px;text-align:center;transition:all 0.3s}
+.stat-card:hover{border-color:var(--neon-blue);box-shadow:0 0 25px rgba(0,212,255,0.2);transform:translateY(-3px)}
+.stat-num{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:1px;margin-top:5px}
+@media(max-width:600px){.about-grid{grid-template-columns:1fr}}
+
+/* SERVICES */
+#services{background:var(--dark)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+.service-card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:30px 25px;position:relative;overflow:hidden;transition:all 0.4s;cursor:default}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(180,0,255,0.05));opacity:0;transition:opacity 0.3s}
+.service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple));transform:scaleX(0);transition:transform 0.4s;transform-origin:left}
+.service-card:hover::before{opacity:1}
+.service-card:hover::after{transform:scaleX(1)}
+.service-card:hover{transform:translateY(-8px) rotateX(5deg);border-color:rgba(0,212,255,0.3);box-shadow:0 20px 60px rgba(0,212,255,0.15),0 0 30px rgba(180,0,255,0.1)}
+.service-icon{font-size:2.5rem;margin-bottom:15px;display:block;filter:drop-shadow(0 0 10px rgba(0,212,255,0.5));animation:iconBob 3s ease-in-out infinite}
+@keyframes iconBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(5deg)}}
+.service-card h3{font-family:'Orbitron',monospace;font-size:0.95rem;color:#fff;margin-bottom:10px;letter-spacing:1px}
+.service-card p{color:rgba(255,255,255,0.5);font-size:0.85rem;line-height:1.6}
+
+/* PROJECTS */
+#projects{background:linear-gradient(180deg,var(--dark2) 0%,var(--dark) 100%)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;max-width:1000px;margin:0 auto}
+.project-card{background:var(--glass);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;transition:all 0.4s;position:relative}
+.project-card:hover{transform:translateY(-10px) scale(1.02);border-color:var(--neon-blue);box-shadow:0 20px 60px rgba(0,212,255,0.2),0 0 40px rgba(180,0,255,0.1)}
+.project-img-wrap{width:100%;height:160px;overflow:hidden;position:relative}
+.project-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+.project-card:hover .project-img-wrap img{transform:scale(1.1)}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(transparent,rgba(2,0,16,0.8));opacity:0;transition:opacity 0.3s}
+.project-card:hover .project-overlay{opacity:1}
+.project-info{padding:20px}
+.project-info h3{font-family:'Orbitron',monospace;font-size:0.9rem;color:#fff;margin-bottom:8px;letter-spacing:1px}
+.project-info p{color:rgba(255,255,255,0.5);font-size:0.82rem;line-height:1.5;margin-bottom:15px}
+.project-btn{display:inline-block;padding:8px 18px;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));border-radius:6px;font-family:'Orbitron',monospace;font-size:0.65rem;color:#fff;text-decoration:none;letter-spacing:1px;transition:all 0.3s;box-shadow:0 0 15px rgba(0,212,255,0.3)}
+.project-btn:hover{transform:translateY(-2px);box-shadow:0 5px 25px rgba(0,212,255,0.5)}
+
+/* CONTACT */
+#contact{background:var(--dark)}
+.contact-wrap{max-width:700px;margin:0 auto}
+.contact-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:40px}
+.contact-btn{display:flex;align-items:center;gap:10px;padding:12px 24px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:var(--glass);backdrop-filter:blur(10px);color:#fff;text-decoration:none;font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:1px;transition:all 0.3s}
+.contact-btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,212,255,0.3);border-color:var(--neon-blue)}
+.contact-btn svg{width:18px;height:18px}
+.contact-form{background:var(--glass);backdrop-filter:blur(20px);border:1px solid rgba(0,212,255,0.15);border-radius:20px;padding:35px;position:relative;overflow:hidden}
+.contact-form::before{content:'';position:absolute;top:-2px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple),var(--neon-pink))}
+.form-group{position:relative;margin-bottom:25px}
+.form-group input,.form-group textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;transition:all 0.3s;resize:none}
+.form-group textarea{height:130px}
+.form-group label{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.4);font-size:0.9rem;transition:all 0.3s;pointer-events:none}
+.form-group.textarea-group label{top:16px;transform:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--neon-blue);box-shadow:0 0 20px rgba(0,212,255,0.15);background:rgba(0,212,255,0.03)}
+.form-group input:focus~label,.form-group input:not(:placeholder-shown)~label,
+.form-group textarea:focus~label,.form-group textarea:not(:placeholder-shown)~label{top:-10px;font-size:0.75rem;color:var(--neon-blue);background:var(--dark2);padding:0 6px;left:10px;transform:none}
+.form-group input::placeholder,.form-group textarea::placeholder{color:transparent}
+.submit-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));border:none;border-radius:10px;color:#fff;font-family:'Orbitron',monospace;font-size:0.85rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-transform:uppercase;position:relative;overflow:hidden}
+.submit-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.4s}
+.submit-btn:hover::before{left:100%}
+.submit-btn:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(0,212,255,0.4)}
+
+/* MODAL */
+#modal-overlay{position:fixed;inset:0;background:rgba(2,0,16,0.85);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+#modal-overlay.open{display:flex}
+.modal-box{background:rgba(6,0,26,0.9);border:1px solid rgba(0,212,255,0.2);border-radius:20px;padding:35px;max-width:480px;width:100%;position:relative;max-height:85vh;overflow-y:auto;animation:modalSlide 0.3s ease;box-shadow:0 0 60px rgba(0,212,255,0.2)}
+@keyframes modalSlide{from{opacity:0;transform:translateY(-20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-close{position:absolute;top:15px;right:20px;font-size:1.5rem;cursor:pointer;color:rgba(255,255,255,0.5);transition:color 0.3s;background:none;border:none}
+.modal-close:hover{color:var(--neon-blue)}
+.modal-box h2{font-family:'Orbitron',monospace;font-size:1.1rem;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:25px}
+.modal-links{display:flex;flex-direction:column;gap:12px}
+.modal-link{display:flex;align-items:center;gap:15px;padding:14px 18px;background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#fff;text-decoration:none;font-size:0.9rem;transition:all 0.3s}
+.modal-link:hover{border-color:var(--neon-blue);background:rgba(0,212,255,0.08);transform:translateX(5px)}
+.modal-link-icon{font-size:1.3rem}
+.modal-link-text{flex:1}
+.modal-link-text strong{display:block;font-family:'Orbitron',monospace;font-size:0.75rem;color:var(--neon-blue)}
+.modal-link-text span{font-size:0.8rem;color:rgba(255,255,255,0.5)}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid rgba(0,212,255,0.1);padding:50px 20px 30px;position:relative;z-index:1}
+.footer-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:2px;background:linear-gradient(90deg,transparent,var(--neon-blue),var(--neon-purple),transparent);box-shadow:0 0 20px var(--neon-blue)}
+.footer-content{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:40px}
+.footer-logo{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+.footer-desc{color:rgba(255,255,255,0.4);font-size:0.85rem;line-height:1.6}
+.footer-col h4{font-family:'Orbitron',monospace;font-size:0.75rem;color:var(--neon-blue);letter-spacing:2px;margin-bottom:15px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col ul a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:0.85rem;transition:color 0.3s}
+.footer-col ul a:hover{color:var(--neon-blue)}
+.footer-bottom{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;border-top:1px solid rgba(255,255,255,0.05);padding-top:25px}
+.footer-copy{color:rgba(255,255,255,0.3);font-size:0.8rem}
+.back-top{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;border:none;color:#fff;font-size:1rem;box-shadow:0 0 20px rgba(0,212,255,0.3)}
+.back-top:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,212,255,0.5)}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:36px;height:36px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s}
+.footer-social a:hover{border-color:var(--neon-blue);transform:translateY(-3px);box-shadow:0 5px 20px rgba(0,212,255,0.3)}
+.footer-social a svg{width:16px;height:16px;fill:#fff}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* TECH FLOATING ICONS */
+.tech-float{position:fixed;pointer-events:none;z-index:0;font-size:1.2rem;opacity:0.08;animation:techDrift 15s linear infinite}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-trail"></div>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- BACKGROUND -->
+<div class="glow-blob" id="blob1"></div>
+<div class="glow-blob" id="blob2"></div>
+<div class="glow-blob" id="blob3"></div>
+<div class="grid-bg"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">⟨DEV/⟩</a>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#projects" onclick="closeMobile()">Projects</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="profile-wrap reveal">
+    <div class="profile-glow"></div>
+    <div class="profile-rings"></div>
+    <img class="profile-img" id="profile-img" src="https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg" alt="Profile" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgZmlsbD0iIzA2MDAxYSIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjMwIiBmaWxsPSIjMDBkNGZmIiBvcGFjaXR5PSIwLjMiLz48ZWxsaXBzZSBjeD0iODAiIGN5PSIxNDAiIHJ4PSI0NSIgcnk9IjMwIiBmaWxsPSIjMDBkNGZmIiBvcGFjaXR5PSIwLjIiLz48dGV4dCB4PSI4MCIgeT0iNjUiIGZvbnQtc2l6ZT0iMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwMGQ0ZmYiPvCfkYM8L3RleHQ+PC9zdmc+'">
+  </div>
+
+  <div class="reveal" style="transition-delay:0.1s">
+    <div class="hero-greeting">⚡ Welcome to my portfolio</div>
+  </div>
+
+  <h1 class="hero-name reveal" style="transition-delay:0.2s">VIKASH<br>DEV</h1>
+
+  <div class="typing-wrap reveal" style="transition-delay:0.3s">
+    <span class="typing-prefix">I'm a</span>
+    <span id="typed-text"></span>
+  </div>
+
+  <p class="hero-bio reveal" style="transition-delay:0.4s">
+    Crafting next-generation digital experiences with cutting-edge technology. 
+    Specializing in futuristic web apps, bots, and AI-powered solutions.
+  </p>
+
+  <div class="hero-btns reveal" style="transition-delay:0.5s">
+    <a href="#contact" class="btn btn-primary">⚡ Hire Me</a>
+    <a href="#contact" class="btn btn-outline">📩 Contact Me</a>
+    <a href="#projects" class="btn btn-outline">🚀 Projects</a>
+    <button class="btn btn-primary" onclick="openModal()">🌐 My Websites</button>
+  </div>
+
+  <div class="social-row reveal" style="transition-delay:0.6s">
+    <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" class="social-icon si-ig" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://wa.me/917828510414" class="social-icon si-wa" target="_blank" title="WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="https://t.me/Vikashsahu07" class="social-icon si-tg" target="_blank" title="Telegram">
+      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+  <div class="section-title reveal">
+    <h2>About Me</h2>
+    <div class="title-line"></div>
+    <p>WHO I AM</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal-left">
+      <h3>⟨ Hello World /⟩</h3>
+      <p>I'm a passionate full-stack developer and creative designer who transforms ideas into stunning digital realities. With expertise spanning web development, bot creation, and UI/UX design.</p>
+      <p>I build futuristic, performance-optimized applications that push the boundaries of modern technology. Every project is crafted with precision, passion, and a cyberpunk soul.</p>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">Termux</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Telegram Bots</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">API Dev</span>
+        <span class="skill-tag">AI Tools</span>
+      </div>
+    </div>
+    <div class="about-stats reveal-right">
+      <div class="stat-card"><div class="stat-num">50+</div><div class="stat-label">PROJECTS DONE</div></div>
+      <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">YEARS EXP</div></div>
+      <div class="stat-card"><div class="stat-num">30+</div><div class="stat-label">CLIENTS</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">SATISFACTION</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section-pad">
+  <div class="section-title reveal">
+    <h2>My Services</h2>
+    <div class="title-line"></div>
+    <p>WHAT I DO</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><span class="service-icon">🌐</span><h3>Website Development</h3><p>Futuristic, responsive websites with cutting-edge animations and pixel-perfect design.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.1s"><span class="service-icon">🤖</span><h3>Bot Development</h3><p>Powerful Telegram & Discord bots with advanced features, AI integration, and automation.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.2s"><span class="service-icon">🎨</span><h3>Thumbnail Design</h3><p>Eye-catching, viral-ready thumbnails that dramatically boost click-through rates.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.3s"><span class="service-icon">✏️</span><h3>UI/UX Design</h3><p>Intuitive, beautiful interfaces with smooth animations and premium user experiences.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.4s"><span class="service-icon">⚡</span><h3>API Services</h3><p>Custom REST APIs, webhooks, and backend services built for speed and reliability.</p></div>
+    <div class="service-card reveal" style="transition-delay:0.5s"><span class="service-icon">🧠</span><h3>AI Tools</h3><p>Smart AI-powered applications, chatbots, and automation tools using latest ML models.</p></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section-pad">
+  <div class="section-title reveal">
+    <h2>Live Projects</h2>
+    <div class="title-line"></div>
+    <p>MY WORK</p>
+  </div>
+  <div class="projects-grid" id="projects-grid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+  <div class="section-title reveal">
+    <h2>Contact Me</h2>
+    <div class="title-line"></div>
+    <p>LET'S WORK TOGETHER</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-btns reveal">
+      <a href="https://wa.me/917828510414" class="contact-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://t.me/Vikashsahu07" class="contact-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="#2CA5E0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+      <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" class="contact-btn" target="_blank">
+        <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="mailto:djvikashkumar99@email.com" class="contact-btn">
+        <svg viewBox="0 0 24 24" fill="var(--neon-blue)"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        Email
+      </a>
+    </div>
+    <div class="contact-form reveal" style="transition-delay:0.2s">
+      <form onsubmit="handleForm(event)">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Name" required>
+          <label for="name">Your Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+          <label for="email">Your Email</label>
+        </div>
+        <div class="form-group textarea-group">
+          <textarea id="msg" placeholder="Message" required></textarea>
+          <label for="msg">Your Message</label>
+        </div>
+        <button type="submit" class="submit-btn">⚡ SEND MESSAGE</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-glow"></div>
+  <div class="footer-content">
+    <div>
+      <div class="footer-logo">⟨DEV/⟩</div>
+      <p class="footer-desc">Building futuristic digital experiences with cutting-edge technology and cyberpunk aesthetics.</p>
+      <div class="footer-social" style="margin-top:15px">
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Bot Development</a></li>
+        <li><a href="#">UI/UX Design</a></li>
+        <li><a href="#">API Services</a></li>
+        <li><a href="#">AI Tools</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Vikash Dev. All rights reserved.</span>
+    <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  </div>
+</footer>
+
+<div id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>🌐 My Websites</h2>
+    <div class="modal-links">
+      <a href="https://vshack999.github.io/Vikash-sahu/" class="modal-link" target="_blank"><span class="modal-link-icon">🚀</span><div class="modal-link-text"><strong>MAIN PORTFOLIO</strong><span>vikashdev.com</span></div><span>→</span></a>
+      <a href="https://vshack999.github.io/Admin-vs-store-/" class="modal-link" target="_blank"><span class="modal-link-icon">🛍️</span><div class="modal-link-text"><strong>MY STORE</strong><span>store.vikashdev.com</span></div><span>→</span></a>
+      <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" class="modal-link" target="_blank"><span class="modal-link-icon">❤️‍🔥</span><div class="modal-link-text"><strong>My Instagram id </strong><span>_vikash_sahu_07</span></div><span>→</span></a>     
+      <a href="https://t.me/Vikashsahu07" class="modal-link" target="_blank"><span class="modal-link-icon">📱</span><div class="modal-link-text"><strong>TELEGRAM ID</strong><span>t.me/vikashdev</span></div><span>→</span></a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── USER SETTINGS ───────────────────────────────────
+const profileImage = "https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg";
+
+const projects = [
+  {title:"Computer Senter",desc:"CSC CENTER | ONLINE SERVICES | DIGITAL SOLUTIONS   Demo Apne portfolio ya business ke liye aisi hi website chahiye? Let's connect! Mujhe DM karein. 💻✨",image:"https://i.ibb.co/Xr2kVHqX/Picsart-26-05-09-13-10-39-200.jpg",url:"https://vshack999.github.io/Computer-/"},
+  {title:"CyberBot Pro",desc:"Advanced Telegram bot with AI responses, admin panel, and payment integration.",image:"https://i.ibb.co/qYGK8sGD/157b432d251b8de1adb73e0928fc95b3.jpg",url:"https://t.me/Vikashsahu07"},
+  {title:"vikash Store",desc:"E-commerce platform with glassmorphism design and seamless checkout flow.",image:"https://i.ibb.co/fdF6BSx7/file-00000000ec807207b2500edfb72fab50.png",url:"https://vshack999.github.io/Admin-vs-store-/"},
+  {title:"Developer card ",desc:"Unified developer dashboard with analytics, API management, and monitoring  Main is website me mera our Demo website design ko nahi Dikh sakhta hu is liye mere ko Dmm karna .",image:"https://i.ibb.co/q31Qq1pn/88ddaee8a964368b5c3757d6dc176d68.jpg",url:"https://vshack999.github.io/Admin-vs-store-/Dev.html"},
+];
+
+const typingTexts = ["Web Developer","Bot Developer","UI/UX Designer","Thumbnail Designer"];
+// ──────────────────────────────────────────────────────
+
+// Set profile image
+if(profileImage && profileImage !== "PASTE_IMGBB_LINK_HERE"){
+  document.getElementById('profile-img').src = profileImage;
+}
+
+// Render projects
+const grid = document.getElementById('projects-grid');
+projects.forEach((p,i)=>{
+  const delay = (i*0.1).toFixed(1);
+  grid.innerHTML += `
+  <div class="project-card reveal" style="transition-delay:${delay}s">
+    <div class="project-img-wrap">
+      <img src="${p.image}" alt="${p.title}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzA2MDAxYSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTA1IiBmb250LXNpemU9IjMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDBkNGZmIj7wn5GKPC90ZXh0Pjwvc3ZnPg=='">
+      <div class="project-overlay"></div>
+    </div>
+    <div class="project-info">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <a href="${p.url}" target="_blank" class="project-btn">⚡ Open Website</a>
+    </div>
+  </div>`;
+});
+
+// ─── TYPING ANIMATION ─────────────────────────────────
+let ti=0,ci=0,del=false;
+const typed=document.getElementById('typed-text');
+function type(){
+  const w=typingTexts[ti];
+  if(!del){typed.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1200);return;}}
+  else{typed.textContent=w.slice(0,--ci);if(ci===0){del=false;ti=(ti+1)%typingTexts.length;}}
+  setTimeout(type,del?60:100);
+}
+type();
+
+// ─── CANVAS PARTICLES ─────────────────────────────────
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  for(let i=0;i<60;i++){
+    pts.push({x:Math.random()*2000,y:Math.random()*2000,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.5+0.5,a:Math.random()});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,212,255,${0.3+0.3*Math.sin(p.a+=0.02)})`;ctx.fill();
+    });
+    // Connect nearby particles
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle=`rgba(0,212,255,${0.1*(1-d/120)})`;ctx.lineWidth=0.5;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── CURSOR ───────────────────────────────────────────
+if(window.innerWidth>768){
+  const cur=document.getElementById('cursor'),dot=document.getElementById('cursor-dot');
+  let mx=0,my=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  function animCursor(){
+    cx+=(mx-cx)*0.12;cy+=(my-cy)*0.12;
+    cur.style.left=cx+'px';cur.style.top=cy+'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a,button,.service-card,.project-card,.social-icon').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='40px';cur.style.height='40px';cur.style.borderColor='var(--neon-purple)';});
+    el.addEventListener('mouseleave',()=>{cur.style.width='20px';cur.style.height='20px';cur.style.borderColor='var(--neon-blue)';});
+  });
+}
+
+// ─── SCROLL PROGRESS ──────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement;
+  const pct=(s.scrollTop/(s.scrollHeight-s.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+
+  // Navbar scroll
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+
+  // Active nav
+  const secs=['home','about','services','projects','contact'];
+  let cur='home';
+  secs.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-120)cur=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// ─── SCROLL REVEAL ────────────────────────────────────
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+// ─── HAMBURGER ────────────────────────────────────────
+const ham=document.getElementById('hamburger'),mob=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');});
+function closeMobile(){ham.classList.remove('open');mob.classList.remove('open');}
+
+// ─── MODAL ────────────────────────────────────────────
+function openModal(){document.getElementById('modal-overlay').classList.add('open');}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+
+// ─── FORM ─────────────────────────────────────────────
+function handleForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.submit-btn');
+  btn.textContent='✅ SENT!';btn.style.background='linear-gradient(135deg,#00ff88,#00d4ff)';
+  setTimeout(()=>{btn.textContent='⚡ SEND MESSAGE';btn.style.background='';e.target.reset();},3000);
+}
+
+// ─── MOUSE GLOW EFFECT ────────────────────────────────
+document.addEventListener('mousemove',e=>{
+  const x=e.clientX/window.innerWidth,y=e.clientY/window.innerHeight;
+  document.getElementById('blob3').style.left=(30+x*40)+'%';
+  document.getElementById('blob3').style.top=(30+y*40)+'%';
+});
+</script>
+</body>
+</html>
