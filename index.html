@@ -1,1424 +1,1006 @@
 <!DOCTYPE html>
-<html lang="hi" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="icon" href="logo.png" type="image/png">
-<title>Vikash Sahu | Vibe Coder & Cyber Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vikash Sahu | Vibe Coder, Web Developer &amp; XAUUSD Trader</title>
+<meta name="description" content="Vikash Sahu builds Android APKs, web apps and Telegram bots with vibe coding, trades XAUUSD with price action, and shares cyber security awareness tips.">
+<meta name="theme-color" content="#030014">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vikash Sahu | Vibe Coder &amp; Web Developer">
+<meta property="og:description" content="Android APKs, web apps, Telegram bots and XAUUSD trading setups, built with vibe coding.">
+<meta property="og:image" content="https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Optional fonts: the page works with the fallback stacks if these do not load. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@600;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vikash Sahu",
+  "jobTitle": "Web Developer and Vibe Coder",
+  "sameAs": [
+    "https://t.me/Vikashsahu07",
+    "https://www.instagram.com/_vikash_sahu__07"
+  ]
+}
+</script>
+
+<script>
+/* Apply the saved theme before first paint to avoid a flash. Dark is the default. */
+(function () {
+  try {
+    var t = localStorage.getItem('vk-theme');
+    if (t === 'light' || t === 'dark') { document.documentElement.setAttribute('data-theme', t); }
+  } catch (e) { /* storage unavailable: keep default */ }
+})();
+</script>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-/* ─── COLOR THEMES ─── */
+/* ---------- Design tokens ---------- */
 :root {
-  --neon-blue: #00d4ff;
-  --neon-purple: #b400ff;
-  --neon-pink: #ff006e;
-  --neon-green: #00ff88;
-  --dark: #030014;
-  --dark2: #080020;
-  --text-main: #ffffff;
-  --text-dim: rgba(255,255,255,0.7);
-  --glass: rgba(255,255,255,0.05);
-  --glass-border: rgba(255,255,255,0.1);
-  --card-bg: rgba(10, 2, 30, 0.7);
-  --slider-bg: rgba(6, 0, 24, 0.9);
-  --grid-line: rgba(0,212,255,0.04);
+  --f-display: 'Orbitron', 'Eurostile', 'Bank Gothic', 'Trebuchet MS', system-ui, sans-serif;
+  --f-body: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius: 26px;
+}
+:root[data-theme="dark"] {
+  --bg: #030014;
+  --text: #eaf0ff;
+  --muted: #9aa6c7;
+  --glass: rgba(255, 255, 255, 0.055);
+  --glass-soft: rgba(255, 255, 255, 0.04);
+  --glass-strong: rgba(10, 8, 34, 0.92);
+  --border: rgba(140, 170, 255, 0.2);
+  --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --c1: #00e5ff;
+  --c2: #8b6bff;
+  --c3: #ff3df2;
+  --glow: rgba(0, 229, 255, 0.55);
+  --glow2: rgba(139, 107, 255, 0.45);
+  --on-accent: #02030f;
+  --orb-o: 0.30;
+  --up: #2bffb0;
+  --dn: #ff5c80;
+  --grid: rgba(150, 170, 255, 0.10);
+  --chart-bg: rgba(4, 6, 24, 0.55);
+  --face: #f4f7ff;
+  --e1: #3b82f6; --e2: #2f62d8; --e3: #2549b0; --e4: #1b3387; --e5: #12225e;
+}
+:root[data-theme="light"] {
+  --bg: #f2f5ff;
+  --text: #0d1230;
+  --muted: #4a5478;
+  --glass: rgba(255, 255, 255, 0.66);
+  --glass-soft: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.96);
+  --border: rgba(70, 92, 200, 0.22);
+  --shadow: 0 22px 50px -26px rgba(52, 70, 170, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --c1: #0072ff;
+  --c2: #6a3df0;
+  --c3: #d61fbf;
+  --glow: rgba(0, 114, 255, 0.40);
+  --glow2: rgba(106, 61, 240, 0.32);
+  --on-accent: #ffffff;
+  --orb-o: 0.42;
+  --up: #0aa36b;
+  --dn: #e0284f;
+  --grid: rgba(40, 60, 140, 0.12);
+  --chart-bg: rgba(255, 255, 255, 0.7);
+  --face: #101a4d;
+  --e1: #6f8dff; --e2: #5d78f0; --e3: #4b63d6; --e4: #3a4fb8; --e5: #2b3c96;
 }
 
-[data-theme="light"] {
-  --neon-blue: #0284c7;
-  --neon-purple: #7c3aed;
-  --neon-pink: #e11d48;
-  --neon-green: #059669;
-  --dark: #f1f5f9;
-  --dark2: #ffffff;
-  --text-main: #000000;  /* Pure Black for headings */
-  --text-dim: #000000;   /* Pure Black for paragraphs */
-  --glass: rgba(255,255,255,0.85);
-  --glass-border: rgba(0,0,0,0.1);
-  --card-bg: rgba(255, 255, 255, 0.95);
-  --slider-bg: rgba(248, 250, 252, 0.98);
-  --grid-line: rgba(2, 132, 199, 0.06);
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: clip;
+  transition: background-color .4s ease, color .4s ease;
 }
-
-
-html{scroll-behavior:smooth}
-body{
-  background:var(--dark);
-  color:var(--text-main);
-  font-family:'Rajdhani',sans-serif;
-  overflow-x:hidden;
-  transition:background 0.4s ease, color 0.4s ease;
+img, svg { max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+h2, h3 { line-height: 1.2; }
+:focus-visible { outline: 2px solid var(--c1); outline-offset: 3px; border-radius: 8px; }
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--c1); color: var(--on-accent); padding: .6rem 1rem; border-radius: 10px; font-weight: 600;
 }
+.skip:focus { top: 1rem; }
+.container { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+main, footer { position: relative; z-index: 1; }
+section { padding: clamp(4rem, 9vw, 7rem) 0; scroll-margin-top: 4rem; }
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--dark)}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--neon-blue),var(--neon-purple));border-radius:3px}
+/* Static, calm background orbs (no moving gradients) */
+.orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; opacity: var(--orb-o); }
+.orb.o1 { width: 60vmax; height: 60vmax; top: -22vmax; left: -20vmax; background: radial-gradient(circle, var(--c1) 0%, transparent 62%); }
+.orb.o2 { width: 55vmax; height: 55vmax; top: 22vh; right: -24vmax; background: radial-gradient(circle, var(--c2) 0%, transparent 62%); }
+.orb.o3 { width: 46vmax; height: 46vmax; bottom: -22vmax; left: 12vw; background: radial-gradient(circle, var(--c3) 0%, transparent 62%); opacity: calc(var(--orb-o) * .7); }
 
-/* SCROLL PROGRESS */
-#progress-bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple),var(--neon-pink));z-index:9999;width:0%;box-shadow:0 0 12px var(--neon-blue); transition: width 0.1s ease;}
-
-/* ─── ANIMATIONS ─── */
-@keyframes blobMove{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,30px) scale(1.15)}}
-@keyframes floatUpDown {0%, 100% {transform: translateY(0);} 50% {transform: translateY(-12px);}}
-@keyframes rotate{to{transform:rotate(360deg)}}
-
-.float-anim { animation: floatUpDown 4s ease-in-out infinite; }
-
-.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-.reveal.active { opacity: 1; transform: translateY(0); }
-.reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-.reveal-left.active { opacity: 1; transform: translateX(0); }
-.reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-.reveal-right.active { opacity: 1; transform: translateX(0); }
-
-/* BACKGROUND GLOWS */
-.glow-blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:0.18;pointer-events:none;z-index:0;animation:blobMove 8s ease-in-out infinite alternate}
-#blob1{width:380px;height:380px;background:var(--neon-blue);top:-100px;left:-100px}
-#blob2{width:340px;height:340px;background:var(--neon-purple);bottom:-100px;right:-50px;animation-delay:-3s}
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:45px 45px}
-
-/* NAVBAR */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:15px 25px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,0,20,0.65);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);transition:all 0.4s ease}
-[data-theme="light"] nav{background:rgba(255,255,255,0.85)}
-.nav-logo{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;letter-spacing:2px; transition: transform 0.3s;}
-.nav-logo:hover { transform: scale(1.05); }
-
-.nav-links{display:flex;gap:20px;list-style:none;align-items:center}
-.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.3s;font-family:'Orbitron',monospace}
-.nav-links a:hover{color:var(--neon-blue)}
-
-/* ─── DARK/LIGHT MODE TOGGLE ON/OFF BUTTON ─── */
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* ---------- Glass + tilt + neon border ---------- */
+.glass {
+  position: relative;
   background: var(--glass);
-  border: 1px solid var(--glass-border);
-  padding: 5px 12px;
-  border-radius: 30px;
-  font-family: 'Orbitron', monospace;
-  font-size: 0.75rem;
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all 0.3s;
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  backdrop-filter: blur(26px) saturate(160%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
-.theme-switch-wrapper:hover { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0,212,255,0.3); }
-.theme-switch {
-  position: relative;
-  width: 36px;
-  height: 18px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 20px;
-  transition: 0.4s;
+.glass::before, .btn::before, .cbtn::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity .35s ease; pointer-events: none;
 }
-.theme-switch::before {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  background: #fff;
-  transition: 0.4s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+.glass:hover::before, .btn:hover::before, .cbtn:hover::before,
+.glass:focus-within::before, .btn:focus-visible::before { opacity: 1; }
+.glass::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .10), transparent 45%);
+  transition: opacity .3s ease;
 }
-[data-theme="light"] .theme-switch { background: var(--neon-blue); }
-[data-theme="light"] .theme-switch::before { transform: translateX(18px); }
-.theme-label { display: inline-block; min-width: 65px; text-transform: uppercase;}
+.glass:hover::after { opacity: 1; }
+:root[data-theme="light"] .glass::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .7), transparent 45%); }
 
-/* SECTION COMMON */
-section{position:relative;z-index:1; padding:90px 20px;}
-.section-title{text-align:center;margin-bottom:50px}
-.section-title h2{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;background:linear-gradient(135deg,var(--text-main),var(--neon-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.section-title p{color:var(--neon-blue);font-size:0.85rem;letter-spacing:4px;margin-top:8px;font-family:'Orbitron',monospace}
-.title-line{width:80px;height:3px;background:linear-gradient(90deg,var(--neon-blue),var(--neon-purple));margin:15px auto;box-shadow:0 0 10px var(--neon-blue); border-radius:5px;}
-
-/* HERO */
-#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 20px 60px;gap:22px}
-.profile-wrap{position:relative;width:160px;height:160px;margin:0 auto}
-.profile-rings{position:absolute;inset:-15px;border-radius:50%;border:2px solid transparent;border-top-color:var(--neon-blue);border-right-color:var(--neon-purple);animation:rotate 4s linear infinite}
-.profile-img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid var(--neon-blue);box-shadow:0 0 40px rgba(0,212,255,0.5); transition: transform 0.4s ease;}
-.profile-wrap:hover .profile-img { transform: scale(1.05); }
-.hero-greeting{font-family:'Orbitron',monospace;font-size:0.8rem;letter-spacing:5px;color:var(--neon-blue)}
-.hero-name{font-family:'Orbitron',monospace;font-size:clamp(2.5rem,6vw,4rem);font-weight:900;background:linear-gradient(135deg,var(--text-main) 40%,var(--neon-blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
-.typing-wrap{font-size:clamp(1.1rem,3vw,1.4rem);color:var(--neon-blue);height:30px;display:flex;align-items:center;justify-content:center;gap:8px}
-#typed-text{border-right:2px solid var(--neon-blue);padding-right:4px}
-.hero-bio{max-width:580px;color:var(--text-dim);font-size:1.05rem;line-height:1.7}
-
-.hero-btns{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-top:15px}
-.btn{padding:12px 28px;border-radius:8px;font-family:'Orbitron',monospace;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all 0.3s ease;display:inline-block}
-.btn-primary{background:linear-gradient(135deg,var(--neon-blue),var(--neon-purple));color:#fff;border:none;box-shadow:0 0 20px rgba(0,212,255,0.3)}
-.btn-outline{background:transparent;color:var(--neon-blue);border:1px solid var(--neon-blue)}
-.btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,212,255,0.5)}
-
-/* SOCIAL */
-.social-row{display:flex;gap:15px;justify-content:center;margin-top:15px}
-.social-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid var(--glass-border);text-decoration:none;transition:all 0.3s ease}
-.social-icon svg{width:22px;height:22px}
-.social-icon:hover{transform:translateY(-5px) scale(1.1);border-color:var(--neon-blue);box-shadow:0 10px 25px rgba(0,212,255,0.4)}
-.si-ig svg{fill:#E1306C}.si-wa svg{fill:#25D366}.si-tg svg{fill:#2CA5E0}
-
-/* ─── SLIDER COMMON STYLING ─── */
-.slider-container{
-  position:relative;
-  width:100%;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid var(--glass-border);
-  box-shadow:0 15px 40px rgba(0,0,0,0.3);
-  background:var(--slider-bg);
-  transition: box-shadow 0.4s ease;
-}
-.slider-container:hover { box-shadow:0 20px 50px rgba(0,212,255,0.2); }
-.slides-wrapper{
-  display:flex;
-  transition:transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  width:100%;
-}
-.slide-item{ min-width:100%; box-sizing:border-box; }
-.slider-nav{ position:absolute; bottom:15px; right:15px; display:flex; gap:10px; z-index:10; }
-.slider-btn{ background:rgba(0,0,0,0.7); border:1px solid var(--glass-border); color:#fff; width:36px; height:36px; border-radius:50%; cursor:pointer; display:grid; place-items:center; transition:all 0.3s ease; backdrop-filter: blur(5px);}
-.slider-btn:hover{background:var(--neon-blue); color:#000; border-color:var(--neon-blue); transform: scale(1.1);}
-.slide-counter { position:absolute; top:15px; right:15px; background:rgba(0,0,0,0.7); color:#fff; font-family:'Orbitron',monospace; font-size:0.75rem; padding:4px 10px; border-radius:15px; backdrop-filter: blur(5px); border:1px solid var(--glass-border); z-index:10;}
-
-/* ABOUT BOX */
-.about-box{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1.2fr 0.9fr;gap:40px;align-items:center}
-.about-text h3{font-family:'Orbitron',monospace;font-size:1.3rem;color:var(--neon-blue);margin-bottom:15px}
-.about-text p{color:var(--text-dim);font-size:0.95rem;line-height:1.7;margin-bottom:15px}
-.vibe-list{list-style:none;margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.vibe-list li{background:var(--glass);border:1px solid var(--glass-border);padding:12px 15px;border-radius:8px;font-size:0.85rem;color:var(--text-main);display:flex;align-items:center;gap:10px; transition: all 0.3s ease;}
-.vibe-list li:hover{transform: translateX(5px); border-color:var(--neon-blue); background:rgba(0,212,255,0.05);}
-.vibe-list li span{color:var(--neon-blue);font-weight:bold; font-size:1.1rem;}
-
-.photo-slide-img{ width:100%; height:380px; object-fit:cover; display:block; transition: transform 5s linear; }
-.slide-item:hover .photo-slide-img { transform: scale(1.05); }
-
-/* ─── CYBER CRIME SLIDER ─── */
-.cyber-slider-wrap{max-width:980px;margin:0 auto}
-.cyber-slide-card{ display:grid; grid-template-columns:1fr 1.2fr; min-height:380px; }
-.cyber-slide-img-box{ width:100%; height:100%; overflow:hidden; position:relative; background:#090014; }
-.cyber-slide-img-box img{ width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;}
-.cyber-slide-card:hover .cyber-slide-img-box img { transform: scale(1.08); }
-.cyber-slide-content{ padding:35px; display:flex; flex-direction:column; justify-content:center; }
-.cyber-tag{display:inline-block;font-family:'Orbitron',monospace;font-size:0.7rem;padding:5px 12px;border-radius:6px;background:rgba(255,0,110,0.15);color:var(--neon-pink);margin-bottom:15px;width:fit-content; border: 1px solid rgba(255,0,110,0.3);}
-.cyber-slide-content h4{font-family:'Orbitron',monospace;font-size:1.3rem;color:var(--text-main);margin-bottom:12px}
-.cyber-slide-content p{font-size:0.92rem;color:var(--text-dim);line-height:1.7}
-.pro-tip{margin-top:20px;padding:15px;background:var(--glass);border-left:4px solid var(--neon-blue);border-radius:8px;font-size:0.85rem;color:var(--neon-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
-
-/* INSTAGRAM DIRECT CARD */
-.insta-box{max-width:980px;margin:40px auto 0;background:linear-gradient(135deg,rgba(225,48,108,0.15),var(--glass));border:1px solid rgba(225,48,108,0.4);border-radius:16px;padding:25px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px; transition: all 0.4s ease;}
-.insta-box:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(225,48,108,0.2); }
-.insta-left{display:flex;align-items:center;gap:16px}
-.insta-avatar{width:56px;height:56px;border-radius:50%;border:2px solid #E1306C;overflow:hidden}
-.insta-avatar img{width:100%;height:100%;object-fit:cover}
-
-/* SINGLE PROJECT */
-.project-container{max-width:480px;margin:0 auto}
-.project-card{background:var(--card-bg);border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;transition:all 0.4s ease}
-.project-card:hover{transform:translateY(-8px);border-color:var(--neon-blue);box-shadow:0 20px 50px rgba(0,212,255,0.25)}
-.project-img-wrap{width:100%;height:220px;overflow:hidden}
-.project-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
-.project-card:hover .project-img-wrap img{transform:scale(1.1)}
-.project-info{padding:25px}
-.project-info h3{font-family:'Orbitron',monospace;font-size:1.1rem;color:var(--text-main);margin-bottom:10px}
-.project-info p{color:var(--text-dim);font-size:0.9rem;line-height:1.6;margin-bottom:20px}
-
-/* CONTACT */
-.contact-wrap{max-width:680px;margin:0 auto}
-.contact-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:35px}
-.contact-btn{display:flex;align-items:center;gap:10px;padding:14px 22px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);color:var(--text-main);text-decoration:none;font-family:'Orbitron',monospace;font-size:0.8rem;transition:all 0.3s ease}
-.contact-btn:hover{border-color:var(--neon-blue);transform:translateY(-4px); box-shadow: 0 10px 25px rgba(0,212,255,0.2);}
-
-/* =======================================================
-   🛡️ HIGH-PRIORITY SECURITY & LEGAL DISCLAIMER BOX
-   ======================================================= */
-.warning-note {
-  max-width: 850px;
-  margin: 45px auto 0;
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.12), rgba(10, 2, 30, 0.9));
-  border: 1.5px solid var(--neon-pink);
-  border-radius: 14px;
-  padding: 25px 30px;
-  box-shadow: 0 0 25px rgba(255, 0, 110, 0.25), inset 0 0 15px rgba(255, 0, 110, 0.08);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+[data-tilt] {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0px));
+  transition: transform .22s ease, box-shadow .35s ease, border-color .35s ease, filter .35s ease;
+  will-change: transform;
 }
 
-/* Hover karne par aur zyada prominent hoga */
-.warning-note:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 35px rgba(255, 0, 110, 0.4), inset 0 0 20px rgba(255, 0, 110, 0.15);
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  padding: .9rem 1.7rem; border-radius: 14px; font: 600 1rem var(--f-body); text-decoration: none; cursor: pointer;
+  border: 1px solid var(--border); color: var(--text); background: var(--glass);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
 }
-
-/* Notice Header Styling */
-.notice-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-  padding-bottom: 10px;
+.btn:hover { --ty: -3px; border-color: transparent; box-shadow: 0 0 22px -2px var(--glow), 0 0 50px -8px var(--glow2); }
+.btn-primary {
+  background: linear-gradient(120deg, var(--c1), var(--c2)); color: var(--on-accent); border-color: transparent;
+  box-shadow: 0 10px 30px -10px var(--glow);
 }
+.btn-primary:hover { box-shadow: 0 0 26px 0 var(--glow), 0 0 64px -6px var(--glow2); }
+.btn svg { width: 1.15em; height: 1.15em; flex: none; }
 
-.notice-icon {
-  font-size: 1.4rem;
-  animation: pulseWarning 2s infinite;
+/* ---------- Navbar ---------- */
+.nav {
+  position: fixed; top: 12px; left: 0; right: 0; margin: 0 auto; z-index: 60;
+  width: min(1120px, 100% - 1.5rem);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .55rem .7rem .55rem 1.3rem; border-radius: 999px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%);
+  border: 1px solid var(--border); box-shadow: var(--shadow);
 }
-
-@keyframes pulseWarning {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.15); opacity: 0.7; }
+.logo {
+  font: 800 1.15rem var(--f-display); letter-spacing: .08em; text-decoration: none; color: var(--c1);
+  text-shadow: 0 0 10px var(--glow), 0 0 26px var(--glow), 0 0 48px var(--glow2);
+  white-space: nowrap;
 }
-
-.notice-header strong {
-  color: var(--neon-pink) !important;
-  font-family: 'Orbitron', monospace;
-  font-size: 0.95rem;
-  letter-spacing: 1px;
+.nav-right { display: flex; align-items: center; gap: .5rem; }
+.menu { display: flex; list-style: none; margin: 0; padding: 0; gap: .2rem; }
+.menu a {
+  position: relative; display: block; padding: .5rem 1rem; border-radius: 999px; text-decoration: none;
+  color: var(--muted); font-weight: 500; transition: color .25s ease, background-color .25s ease;
 }
-
-/* Notice Body Text */
-.warning-note p {
-  color: var(--text-main) !important;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  letter-spacing: 0.3px;
+.menu a:hover { color: var(--text); background: var(--glass-soft); }
+.menu a.active { color: var(--text); }
+.menu a.active::after {
+  content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 2px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--c1), var(--c2)); box-shadow: 0 0 10px var(--glow);
 }
-
-.warning-note p strong {
-  color: #ffaa00 !important; /* Important keywords highlight (Golden) */
-  font-weight: 600;
+.theme {
+  position: relative; width: 62px; height: 34px; border-radius: 999px; cursor: pointer; padding: 0;
+  border: 1px solid var(--border); background: var(--glass-soft); flex: none;
+  transition: box-shadow .3s ease, border-color .3s ease;
 }
-
-/* Light Mode Support */
-[data-theme="light"] .warning-note {
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.08), #ffffff);
-  border-color: #e11d48;
-  box-shadow: 0 5px 25px rgba(225, 29, 72, 0.15);
+.theme:hover { box-shadow: 0 0 18px -2px var(--glow); border-color: var(--c1); }
+.theme .knob {
+  position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--on-accent);
+  background: linear-gradient(135deg, var(--c1), var(--c2)); box-shadow: 0 0 14px var(--glow);
+  transition: transform .35s cubic-bezier(.3, .9, .3, 1.1);
 }
-
-[data-theme="light"] .warning-note p {
-  color: #000000 !important;
-  font-weight: 500;
+:root[data-theme="light"] .theme .knob { transform: translateX(28px); }
+.theme svg { width: 15px; height: 15px; }
+.theme .i-sun { display: none; }
+:root[data-theme="light"] .theme .i-sun { display: block; }
+:root[data-theme="light"] .theme .i-moon { display: none; }
+.burger {
+  display: none; width: 40px; height: 40px; border-radius: 12px; cursor: pointer; padding: 0;
+  border: 1px solid var(--border); background: var(--glass-soft); color: var(--text); place-items: center;
 }
+.burger svg { width: 20px; height: 20px; }
 
-[data-theme="light"] .notice-header {
-  border-bottom-color: rgba(0, 0, 0, 0.15);
+/* ---------- Hero ---------- */
+.hero { min-height: 100vh; min-height: 100svh; display: grid; align-items: center; padding: 7.5rem 0 4rem; }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: center; }
+.hello { color: var(--muted); font-size: 1.1rem; margin-bottom: .4rem; }
+.grad-name {
+  font: 900 clamp(2.25rem, 7vw, 4.8rem) / 1.06 var(--f-display); letter-spacing: .02em;
+  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c2), var(--c1));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  animation: flow 7s linear infinite; filter: drop-shadow(0 0 18px var(--glow2));
 }
+.typing { margin-top: 1.1rem; font: 500 clamp(1rem, 2.6vw, 1.25rem) var(--f-mono); color: var(--muted); min-height: 1.7em; }
+.typing .typed { color: var(--c1); text-shadow: 0 0 14px var(--glow); font-weight: 600; }
+.caret { display: inline-block; width: 2px; height: 1.1em; margin-left: 3px; vertical-align: -0.18em; background: var(--c1); animation: blink 1s steps(2, start) infinite; }
+.bio { margin-top: 1.3rem; max-width: 54ch; color: var(--muted); font-size: 1.1rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
 
-/* MODAL */
-#modal-overlay{position:fixed;inset:0;background:rgba(2,0,16,0.85);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
-#modal-overlay.open{display:flex}
-.modal-box{background:var(--card-bg);border:1px solid var(--neon-blue);border-radius:16px;padding:30px;max-width:420px;width:100%;position:relative; animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
-@keyframes modalPop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-.modal-close{position:absolute;top:12px;right:18px;font-size:1.5rem;cursor:pointer;color:var(--text-dim);background:none;border:none; transition: color 0.2s;}
-.modal-close:hover { color: var(--neon-pink); }
-.modal-links{display:flex;flex-direction:column;gap:15px;margin-top:20px}
-.modal-link{display:flex;align-items:center;gap:15px;padding:15px;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;color:var(--text-main);text-decoration:none; transition: all 0.3s ease;}
-.modal-link:hover{border-color:var(--neon-blue);transform:translateX(8px); background:rgba(0,212,255,0.1);}
-
-footer{border-top:1px solid var(--glass-border);padding:30px;text-align:center;font-size:0.85rem;color:var(--text-dim)}
-
-@media(max-width:820px){
-  .about-box{grid-template-columns:1fr}
-  .cyber-slide-card{grid-template-columns:1fr}
-  .cyber-slide-img-box{height:240px}
-  .nav-links{display:none}
+.avatar-wrap { position: relative; width: clamp(230px, 34vw, 370px); aspect-ratio: 1; margin-inline: auto; transform-style: preserve-3d; }
+.ring, .ring-glow { position: absolute; inset: -7px; border-radius: 50%; background: conic-gradient(from 0deg, var(--c1), var(--c2), var(--c3), var(--c1)); animation: spin 9s linear infinite; }
+.ring-glow { filter: blur(26px); opacity: .55; inset: -10px; }
+.avatar {
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden; border: 6px solid var(--bg);
+  background: linear-gradient(135deg, var(--c2), var(--c1)); display: grid; place-items: center;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
 }
-
-/* --- LIGHT MODE PURE BLACK TEXT FIX --- */
-[data-theme="light"] body, 
-[data-theme="light"] p, 
-[data-theme="light"] h1, 
-[data-theme="light"] h2, 
-[data-theme="light"] h3, 
-[data-theme="light"] h4, 
-[data-theme="light"] li, 
-[data-theme="light"] span,
-[data-theme="light"] a,
-[data-theme="light"] div,
-[data-theme="light"] footer {
-  color: #000000 !important;
+.avatar .initials { position: absolute; font: 900 4rem var(--f-display); color: var(--on-accent); }
+.avatar img { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; }
+.chip3d {
+  position: absolute; padding: .45rem .95rem; border-radius: 999px; font: 600 .85rem var(--f-mono);
+  background: var(--glass-strong); border: 1px solid var(--border); color: var(--text);
+  box-shadow: 0 10px 26px -10px rgba(0, 0, 0, .55), 0 0 18px -4px var(--glow);
+  transform: translateZ(60px); animation: floaty 5s ease-in-out infinite; white-space: nowrap;
 }
+.chip3d.a { top: 6%; right: -8%; }
+.chip3d.b { bottom: 8%; left: -10%; animation-delay: -2.4s; }
 
-/* Headings me se color mix (gradient) hatane ke liye */
-[data-theme="light"] .section-title h2,
-[data-theme="light"] .hero-name,
-[data-theme="light"] .nav-logo,
-[data-theme="light"] .about-text h3 {
-  background: none !important;
-  -webkit-text-fill-color: #000000 !important;
+/* ---------- Section headings ---------- */
+.sec-head { text-align: center; margin-bottom: 2.6rem; }
+.sec-head h2 { font: 800 clamp(1.7rem, 4.6vw, 2.7rem) var(--f-display); letter-spacing: .02em; }
+.sec-head h2 small { display: block; margin-top: .5rem; font: 500 clamp(.95rem, 2.4vw, 1.2rem) var(--f-body); color: var(--c1); letter-spacing: .04em; text-shadow: 0 0 16px var(--glow); }
+.sec-head::after { content: ""; display: block; width: 84px; height: 3px; margin: 1.1rem auto 0; border-radius: 3px; background: linear-gradient(90deg, var(--c1), var(--c3)); box-shadow: 0 0 16px var(--glow); }
+.sec-head p { max-width: 62ch; margin: 1rem auto 0; color: var(--muted); }
+
+/* ---------- About ---------- */
+.about-card { padding: clamp(1.6rem, 4vw, 3rem); }
+.about-card h2 { font: 800 clamp(1.5rem, 4vw, 2.2rem) var(--f-display); margin-bottom: 1.1rem; }
+.about-card p { color: var(--muted); max-width: 70ch; }
+.about-card p + p { margin-top: .9rem; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.skill {
+  display: flex; align-items: center; gap: .85rem; padding: .95rem 1.1rem; border-radius: 18px;
+  border: 1px solid var(--border); background: var(--glass-soft); font-weight: 500; cursor: default;
 }
+.skill .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--c1); background: rgba(0, 229, 255, .09); transition: box-shadow .3s ease, color .3s ease; flex: none; }
+:root[data-theme="light"] .skill .ico { background: rgba(0, 114, 255, .09); }
+.skill .ico svg { width: 21px; height: 21px; }
+.skill:hover { --ty: -4px; border-color: var(--c1); box-shadow: 0 0 0 1px var(--c1), 0 0 28px -4px var(--glow), 0 0 60px -14px var(--glow2); }
+.skill:hover .ico { color: var(--c3); box-shadow: 0 0 20px var(--glow); }
 
-/* Boxes aur buttons ka border thoda dark karne ke liye taaki clear dikhe */
-[data-theme="light"] .vibe-list li,
-[data-theme="light"] .contact-btn,
-[data-theme="light"] .warning-note {
-  font-weight: 600 !important; /* Text ko thoda bold karega */
-  border-color: rgba(0, 0, 0, 0.3) !important;
-  background: #ffffff !important;
+.aware { margin-top: 1.6rem; padding: clamp(1.4rem, 3.5vw, 2.4rem); }
+.aware h3 { font: 700 1.25rem var(--f-display); }
+.aware > p { color: var(--muted); margin-top: .5rem; }
+.tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+.tip { display: flex; gap: .8rem; align-items: center; padding: .9rem 1rem; border-radius: 16px; border: 1px solid var(--border); background: var(--glass-soft); }
+.tip svg { width: 22px; height: 22px; color: var(--up); flex: none; }
+.tip:hover { --ty: -3px; border-color: var(--up); box-shadow: 0 0 24px -6px var(--up); }
+
+.gallery-title { text-align: center; margin: 4rem 0 2rem; font: 700 1.4rem var(--f-display); }
+.gallery { display: flex; flex-direction: column; align-items: center; gap: 2.2rem; }
+.shot { width: min(100%, 560px); margin: 0; overflow: hidden; border-radius: 28px; transform-style: preserve-3d; }
+.shot img { display: block; width: 100%; height: auto; backface-visibility: hidden; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.shot:hover img { transform: scale(1.06); }
+.shot .miss { display: none; }
+.shot.missing { aspect-ratio: 4 / 5; display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--muted); }
+.shot.missing img { display: none; }
+.shot.missing .miss { display: block; font: 500 .95rem var(--f-mono); }
+
+/* ---------- Trading ---------- */
+.stage3d { perspective: 900px; text-align: center; margin: 0 auto 2.6rem; padding: 1rem 0; }
+.name3d {
+  display: inline-block; font: 900 clamp(2rem, 8vw, 5rem) / 1.1 var(--f-display); letter-spacing: .08em; color: var(--face);
+  transform-style: preserve-3d; animation: sway 8s ease-in-out infinite;
+  text-shadow:
+    1px 1px 0 var(--e1), 2px 2px 0 var(--e2), 3px 3px 0 var(--e3), 4px 4px 0 var(--e4), 5px 5px 0 var(--e5),
+    7px 9px 12px rgba(0, 0, 0, .35), 0 0 30px var(--glow), 0 0 70px var(--glow2);
 }
+.terminal { padding: 0; overflow: hidden; background: var(--chart-bg); }
+.t-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem 1.4rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
+.t-left { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--dn); display: block; }
+.dots i:nth-child(2) { background: #ffc857; }
+.dots i:nth-child(3) { background: var(--up); }
+.sym { font: 700 1.05rem var(--f-mono); }
+.sym small { display: block; font: 400 .72rem var(--f-body); color: var(--muted); }
+.demo-tag { font: 500 .72rem var(--f-mono); padding: .2rem .6rem; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+.t-right { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.price { font: 700 1.5rem var(--f-mono); color: var(--up); text-shadow: 0 0 16px var(--up); font-variant-numeric: tabular-nums; }
+.price.dn { color: var(--dn); text-shadow: 0 0 16px var(--dn); }
+.chg { font: 600 .8rem var(--f-mono); padding: .25rem .6rem; border-radius: 8px; color: var(--up); background: rgba(43, 255, 176, .1); border: 1px solid rgba(43, 255, 176, .3); }
+:root[data-theme="light"] .chg { background: rgba(10, 163, 107, .1); border-color: rgba(10, 163, 107, .35); }
+.chg.dn { color: var(--dn); background: rgba(255, 92, 128, .1); border-color: rgba(255, 92, 128, .35); }
+.tfs { display: inline-flex; padding: 3px; border-radius: 12px; border: 1px solid var(--border); background: var(--glass-soft); }
+.tf { border: 0; background: transparent; color: var(--muted); font: 600 .8rem var(--f-mono); padding: .4rem .8rem; border-radius: 9px; cursor: pointer; transition: color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+.tf:hover { color: var(--text); }
+.tf[aria-pressed="true"] { color: var(--on-accent); background: linear-gradient(120deg, var(--c1), var(--c2)); box-shadow: 0 0 16px -2px var(--glow); }
+.chart-wrap { position: relative; padding: .4rem .6rem 0; min-height: 320px; }
+.chart-wrap svg { display: block; width: 100%; height: auto; }
+.badge { position: absolute; left: 1.2rem; top: 1rem; z-index: 2; font: 600 .78rem var(--f-mono); color: var(--up); padding: .3rem .7rem; border-radius: 999px; background: rgba(43, 255, 176, .1); border: 1px solid rgba(43, 255, 176, .35); pointer-events: none; }
+:root[data-theme="light"] .badge { background: rgba(10, 163, 107, .1); border-color: rgba(10, 163, 107, .4); }
+.t-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+.t-stats div { background: var(--chart-bg); padding: .9rem 1.2rem; }
+.t-stats span { display: block; font-size: .78rem; color: var(--muted); }
+.t-stats b { font: 600 .95rem var(--f-mono); }
+.note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 1.1rem; }
 
-/* Icons (Emoji) ka color sahi rakhne ke liye */
-[data-theme="light"] .vibe-list li span,
-[data-theme="light"] .warning-note strong {
-  -webkit-text-fill-color: initial !important;
-}
+/* chart internals */
+.grid { stroke: var(--grid); stroke-width: 1; }
+.axisline { stroke: var(--border); stroke-width: 1; }
+.ax { fill: var(--muted); font: 10px var(--f-mono); }
+.zl { font: 600 10px var(--f-mono); }
+.z-ob { fill: var(--c1); fill-opacity: .12; stroke: var(--c1); stroke-opacity: .6; stroke-dasharray: 4 4; }
+.z-fvg { fill: var(--c2); fill-opacity: .16; stroke: var(--c2); stroke-opacity: .6; stroke-dasharray: 4 4; }
+.bos { stroke: var(--c3); stroke-opacity: .8; stroke-dasharray: 6 5; stroke-width: 1.2; }
+.cd line { stroke-width: 1.5; stroke-linecap: round; }
+.cd.up line { stroke: var(--up); }
+.cd.up rect { fill: url(#gUp); }
+.cd.dn line { stroke: var(--dn); }
+.cd.dn rect { fill: url(#gDn); }
+.vb.up { fill: var(--up); fill-opacity: .32; }
+.vb.dn { fill: var(--dn); fill-opacity: .32; }
+.cd, .vb { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
+.play .cd, .play .vb { animation: candleIn .6s cubic-bezier(.2, .9, .3, 1.15) both; }
+.chan { fill: url(#gChan); }
+.chan-line { fill: none; stroke: var(--c1); stroke-opacity: .4; stroke-dasharray: 5 6; stroke-width: 1.2; }
+.trend { fill: none; stroke: url(#gTrend); stroke-width: 2.8; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.play .trend { animation: draw 1.8s ease-out 1s forwards; }
+.fx { opacity: 0; }
+.play .fx { animation: fadeIn .8s ease forwards; }
+.pl { stroke: var(--up); stroke-opacity: .75; stroke-dasharray: 3 4; }
+.pl.dn { stroke: var(--dn); }
+.tag rect { fill: var(--up); }
+.tag text { fill: #02140c; font: 700 10.5px var(--f-mono); }
+.tag.dn rect { fill: var(--dn); }
+.tag.dn text { fill: #fff; }
+.tdot { fill: var(--up); }
 
-/* --- DARK MODE PURE BRIGHT WHITE TEXT FIX --- */
-:root, [data-theme="dark"] {
-  --text-dim: #ffffff !important; /* Halke white ko pure white me badal dega */
-}
-
-[data-theme="dark"] p,
-[data-theme="dark"] .hero-bio,
-[data-theme="dark"] .about-text p,
-[data-theme="dark"] .vibe-list li,
-[data-theme="dark"] .warning-note,
-[data-theme="dark"] .cyber-slide-content p,
-[data-theme="dark"] .project-info p {
-  color: #ffffff !important;
-  font-weight: 500 !important; /* Text ko thoda bold aur sharp karega */
-  letter-spacing: 0.5px; /* Padhne me aur aasan banayega */
-}
-
-/* Typing text ke 'Main banata hu' ko bhi white aur clear karne ke liye */
-[data-theme="dark"] .typing-wrap span:first-child {
-  color: #ffffff !important; 
-}
-
-/* =======================================================
-   🚀 ADVANCED CYBERPUNK ANIMATION FOR VIBE LIST (ABOUT SECTION)
-   ======================================================= */
-
-.vibe-list li {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  /* Smooth aur Bouncy transition */
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; 
-}
-
-/* 1. Left side glowing neon line */
-.vibe-list li::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.4s ease;
-  box-shadow: 0 0 15px var(--neon-blue);
-  z-index: -1;
-}
-
-/* 2. Andar ka shimmery light sweep effect */
-.vibe-list li::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
-  transition: left 0.6s ease;
-  z-index: -1;
-}
-
-/* 3. Hover karne par 3D Pop-out aur Shadow */
-.vibe-list li:hover {
-  transform: translateX(12px) translateY(-3px) scale(1.02) !important;
-  border-color: var(--neon-blue) !important;
-  background: rgba(0, 212, 255, 0.08) !important;
-  box-shadow: 0 12px 25px rgba(0, 212, 255, 0.25), inset 0 0 15px rgba(0, 212, 255, 0.05) !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-/* Hover par pseudo-elements ko trigger karna */
-.vibe-list li:hover::before {
-  transform: scaleY(1);
-  transform-origin: top;
-}
-.vibe-list li:hover::after {
-  left: 100%;
-}
-
-/* 4. Icon/Emoji ka Bounce aur Glow Effect */
-.vibe-list li span {
-  display: inline-block;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s !important;
-}
-.vibe-list li:hover span {
-  transform: scale(1.3) rotate(8deg) !important;
-  filter: drop-shadow(0 0 8px var(--neon-blue));
-}
-
-/* =======================================================
-   🚀 PERFECT 3D CYBERPUNK PHOTO SLIDER (NO LINES, CLEAN FIX)
-   ======================================================= */
-
-/* 1. Doosri photo dikhne aur glitch ka 100% fix */
-#personal-slider {
-  position: relative !important;
-  overflow: hidden !important;
-  border-radius: 16px !important;
-  perspective: 1000px !important;
-  border: 2px solid rgba(0, 212, 255, 0.3) !important;
-  background: #000 !important;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-}
-
-.slides-wrapper {
-  display: flex !important;
-  width: 100% !important;
-  height: 100% !important;
-  gap: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  transition: transform 0.5s ease-in-out;
-}
-
-.slide-item {
-  min-width: 100% !important;
-  width: 100% !important;
-  flex: 0 0 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.photo-slide-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-  border-radius: 14px;
-}
-
-/* 2. Bich ki blue line ko HATAANE ke liye ::after ko none kar diya hai */
-#personal-slider::after {
-  display: none !important;
-}
-
-/* 3. Advanced Smooth 3D Hover & Glow Effect */
-#personal-slider:hover {
-  transform: translateY(-8px) scale(1.02) rotateX(2deg) rotateY(-2deg) !important;
-  border-color: var(--neon-blue) !important;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
-              0 0 25px rgba(0, 212, 255, 0.35), 
-              inset 0 0 20px rgba(0, 212, 255, 0.15) !important;
-}
-
-/* Photo ke andar zoom ka smooth effect */
-#personal-slider:hover .photo-slide-img {
-  transform: scale(1.06);
-  transition: transform 0.6s ease;
-}
-
-/* 🕹️ Navigation Buttons Styling */
-#personal-slider .slider-nav {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  z-index: 10;
-  display: flex;
-  gap: 8px;
-}
-
-#personal-slider .slider-btn {
-  background: rgba(10, 2, 30, 0.85) !important;
-  border: 1px solid var(--neon-blue) !important;
-  color: var(--neon-blue) !important;
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(5px);
-  cursor: pointer;
+/* ---------- Contact Buttons (Glass Effect with Light Tint) ---------- */
+.cbtn {
+  position: relative; display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.4rem; border-radius: 20px;
+  color: var(--text); text-decoration: none; 
+  background: var(--bg-tint); /* Halka colour add kiya hai */
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
-
-#personal-slider .slider-btn:hover {
-  background: var(--neon-blue) !important;
-  color: #000 !important;
-  box-shadow: 0 0 15px var(--neon-blue);
-  transform: scale(1.1);
+.cbtn .ci { 
+  width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; 
+  background: var(--glass-soft); flex: none; 
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+.cbtn .ci svg { width: 28px; height: 28px; color: var(--brand); /* Brand color on icon */ }
+.cbtn b { display: block; font: 700 1.15rem var(--f-body); }
+.cbtn span { font-size: .9rem; color: var(--muted); word-break: break-all; }
 
-/* =======================================================
-   🛠️ SLIDER GLITCH FIX & ADVANCED 3D ANIMATION
-   ======================================================= */
-
-/* 1. Doosri photo dikhne wali problem ka FIX (Exact 100% Width) */
-.slides-wrapper {
-  display: flex !important;
-  width: 100% !important;
-  gap: 0 !important; /* Do photos ke beech koi space nahi */
+/* Hover Effect for Glass Buttons */
+.cbtn:hover, .cbtn:focus-visible {
+  --ty: -5px; 
+  background: var(--bg-tint-hover); /* Hover par thoda dark hoga */
+  border-color: var(--brand);
+  box-shadow: 0 10px 30px -10px var(--brand), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.slide-item {
-  flex: 0 0 100% !important; /* Ek photo frame ki exact 100% jagah legi */
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.photo-slide-img {
-  width: 100% !important;
-  object-fit: cover !important;
-  border-radius: 14px; /* Frame ke borders ko gol aur clean rakhega */
-}
-
-/* 2. ADVANCED 3D ANIMATION (Hover karte hi 3D Tilt hoga) */
-#personal-slider {
-  perspective: 1200px !important; /* 3D Depth create karne ke liye */
-  transform-style: preserve-3d !important;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-}
-
-#personal-slider:hover {
-  /* 3D Rotate, Pop-up aur Depth Shadow */
-  transform: translateY(-10px) scale(1.03) rotateX(4deg) rotateY(-4deg) !important;
-  box-shadow: 25px 25px 40px rgba(0, 0, 0, 0.5), 
-              -10px -10px 30px rgba(0, 212, 255, 0.4),
-              inset 0 0 20px rgba(0, 212, 255, 0.2) !important;
-  border-color: var(--neon-blue) !important;
-}
-
-/* Slider Buttons ko photo ke upar z-index dena taaki dabane me asani ho */
-#personal-slider .slider-nav {
-  z-index: 50 !important;
-  transform: translateZ(20px); /* 3D me buttons thode aage dikhenge */
-}
-/* =======================================================
-   ✨ HERO BIO TEXT STYLE & HOVER ANIMATION (NEW COLOR)
-   ======================================================= */
-.hero-bio {
-  font-size: 1.1rem !important; /* Text thoda bada aur clear dikhega */
-  line-height: 1.8 !important;
-  letter-spacing: 0.5px;
-}
-
-.hero-bio strong {
-  /* Theme se alag dikhane ke liye Pink aur Neon Gold ka use kiya hai */
-  background: linear-gradient(135deg, var(--neon-pink), #ffaa00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  display: inline-block;
-  cursor: default;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Hover karne par text 3D style me pop-up hoga aur naye color me glow karega */
-.hero-bio strong:hover {
-  transform: translateY(-3px) scale(1.1);
-  -webkit-text-fill-color: #fff; /* Hover par bright white ho jayega */
-  text-shadow: 0 8px 20px var(--neon-pink), 0 0 15px #ffaa00;
-}
-
-/* =======================================================
-   🔥 ADVANCED CONTACT BUTTONS ANIMATION (CYBERPUNK HUD)
-   ======================================================= */
-
-.contact-btns {
-  gap: 18px !important; /* Buttons ke beech thodi aur jagah */
-}
-
-.contact-btn {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background: rgba(10, 2, 30, 0.6) !important;
-  border: 1px solid rgba(0, 212, 255, 0.3) !important;
-  padding: 15px 30px !important;
-  border-radius: 12px !important;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Button ke andar se guzarne wali chamakti light (Sweep Effect) */
-.contact-btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
-  transition: left 0s; /* Reset without animation */
-  z-index: -1;
-}
-
-/* Hover karne par 3D Pop-out aur Neon Shadows */
-.contact-btn:hover {
-  transform: translateY(-6px) scale(1.05) !important;
-  border-color: var(--neon-blue) !important;
-  background: rgba(0, 212, 255, 0.1) !important;
-  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.6), 
-              inset 0 0 15px rgba(0, 212, 255, 0.3) !important;
-  color: #fff !important;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Text chamkega */
-}
-
-/* Hover par Light left se right jayegi */
-.contact-btn:hover::after {
-  left: 100%;
-  transition: left 0.6s ease;
-}
-
-/* Light mode ke liye specific adjustments */
-[data-theme="light"] .contact-btn {
-  background: #ffffff !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  color: #000000 !important;
-}
-
-[data-theme="light"] .contact-btn:hover {
-  background: rgba(2, 132, 199, 0.1) !important;
-  border-color: var(--neon-blue) !important;
-  color: #000000 !important;
-  text-shadow: none;
-}
-
-/* =======================================================
-   🎨 BRAND COLORS FOR CONTACT BUTTONS (ALWAYS VISIBLE)
-   ======================================================= */
-
-/* 🟢 WhatsApp (Neon Green - Always Visible) */
-.contact-btn.btn-wa { 
-  border: 1px solid #25D366 !important; 
-  color: #25D366 !important; /* Text Green rahega */
-  background: rgba(37, 211, 102, 0.08) !important; /* Halka green background */
-  box-shadow: 0 0 12px rgba(37, 211, 102, 0.2) !important; /* Halka Glow */
-}
-.contact-btn.btn-wa:hover {
-  color: #fff !important; /* Hover par text white ho jayega */
-  background: rgba(37, 211, 102, 0.2) !important;
-  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6), inset 0 0 15px rgba(37, 211, 102, 0.4) !important;
-}
-.contact-btn.btn-wa::after { background: linear-gradient(90deg, transparent, rgba(37, 211, 102, 0.6), transparent) !important; }
-
-/* 🔵 Telegram (Neon Blue - Always Visible) */
-.contact-btn.btn-tg { 
-  border: 1px solid #2CA5E0 !important; 
-  color: #2CA5E0 !important; /* Text Blue rahega */
-  background: rgba(44, 165, 224, 0.08) !important;
-  box-shadow: 0 0 12px rgba(44, 165, 224, 0.2) !important;
-}
-.contact-btn.btn-tg:hover {
-  color: #fff !important;
-  background: rgba(44, 165, 224, 0.2) !important;
-  box-shadow: 0 10px 25px rgba(44, 165, 224, 0.6), inset 0 0 15px rgba(44, 165, 224, 0.4) !important;
-}
-.contact-btn.btn-tg::after { background: linear-gradient(90deg, transparent, rgba(44, 165, 224, 0.6), transparent) !important; }
-
-/* 🟣 Instagram (Neon Pink/Purple - Always Visible) */
-.contact-btn.btn-ig { 
-  border: 1px solid #E1306C !important; 
-  color: #E1306C !important; /* Text Pink rahega */
-  background: rgba(225, 48, 108, 0.08) !important;
-  box-shadow: 0 0 12px rgba(225, 48, 108, 0.2) !important;
-}
-.contact-btn.btn-ig:hover {
-  color: #fff !important;
-  background: rgba(225, 48, 108, 0.2) !important;
-  box-shadow: 0 10px 25px rgba(225, 48, 108, 0.6), inset 0 0 15px rgba(225, 48, 108, 0.4) !important;
-}
-.contact-btn.btn-ig::after { background: linear-gradient(90deg, transparent, rgba(225, 48, 108, 0.6), transparent) !important; }
-/* =======================================================
-   🚨 COMPACT & CLEAN DATA BREACH ALERT BOX
-   ======================================================= */
-.alert-box {
-  max-width: 980px;
-  margin: 35px auto 0;
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.08), rgba(10, 2, 30, 0.85));
-  border: 1px solid rgba(255, 0, 110, 0.35);
-  border-radius: 12px;
-  padding: 20px 22px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* 3D Hover Effect */
-.alert-box:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(255, 0, 110, 0.25), inset 0 0 15px rgba(255, 0, 110, 0.1);
-  border-color: var(--neon-pink);
-}
-
-/* Pulsing Warning Icon */
-.alert-icon {
-  font-size: 2.2rem;
-  flex-shrink: 0;
-  animation: pulseIcon 2s infinite;
-  filter: drop-shadow(0 0 8px var(--neon-pink));
-}
-@keyframes pulseIcon {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.12); opacity: 0.7; }
-}
-
-/* Content Layout */
-.alert-content {
-  flex: 1;
-}
-.alert-content h4 {
-  font-family: 'Orbitron', monospace;
-  color: var(--neon-pink);
-  font-size: 1rem;
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-.alert-content p {
-  color: var(--text-main);
-  font-size: 0.88rem;
-  line-height: 1.5;
-  margin-bottom: 12px;
-}
-.alert-content p strong {
-  color: #ffaa00;
-}
-
-/* Compact WhatsApp Button */
-.btn-alert {
-  background: rgba(37, 211, 102, 0.12);
-  color: #25D366;
-  border: 1px solid #25D366;
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Orbitron', monospace;
-  font-size: 0.75rem;
-  margin-bottom: 10px;
-  transition: all 0.3s ease;
-}
-.btn-alert:hover {
-  background: #25D366;
-  color: #000;
-  box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
-  transform: translateY(-2px);
-}
-
-/* Disclaimer inside Box */
-.alert-disclaimer {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  border-top: 1px dashed rgba(255, 255, 255, 0.15);
-  padding-top: 10px;
-  line-height: 1.4;
-}
-.alert-disclaimer strong {
-  color: #ffaa00;
-}
-
-/* Light Mode Support */
-[data-theme="light"] .alert-box {
-  background: linear-gradient(135deg, rgba(255, 0, 110, 0.04), #ffffff);
-  border-color: rgba(255, 0, 110, 0.25);
-}
-[data-theme="light"] .alert-content p { color: #000000; font-weight: 500; }
-[data-theme="light"] .alert-disclaimer { color: #444444; border-top-color: rgba(0, 0, 0, 0.1); }
-
-/* Mobile Responsive */
-@media(max-width: 768px) {
-  .alert-box { flex-direction: column; align-items: center; text-align: center; padding: 18px; }
-  .alert-icon { margin-bottom: 5px; }
-}
-/* =======================================================
-   🚀 PROJECTS CARD 3D CYBERPUNK ANIMATION
-   ======================================================= */
-.project-card {
-  background: rgba(10, 2, 30, 0.7);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 25px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-}
-
-.project-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--neon-blue);
-  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 212, 255, 0.1);
-}
-
-.project-img-box {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-}
-
-.project-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.project-card:hover .project-img {
-  transform: scale(1.1);
-}
-
-.project-info {
-  padding: 20px;
-}
-
-.project-info h3 {
-  font-family: 'Orbitron', monospace;
-  color: var(--neon-blue);
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-
-.project-info p {
-  color: var(--text-main);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.project-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.project-tags span {
-  font-size: 0.75rem;
-  background: rgba(0, 212, 255, 0.1);
-  color: var(--neon-blue);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  padding: 4px 10px;
-  border-radius: 6px;
-}
+/* Brand Colors aur 25% Background Tint */
+.wa { --brand: #25D366; --bg-tint: rgba(37, 211, 102, 0.25); --bg-tint-hover: rgba(37, 211, 102, 0.35); }
+.tg { --brand: #2CA5E0; --bg-tint: rgba(44, 165, 224, 0.25); --bg-tint-hover: rgba(44, 165, 224, 0.35); }
+.ig { --brand: #E1306C; --bg-tint: rgba(225, 48, 108, 0.25); --bg-tint-hover: rgba(225, 48, 108, 0.35); }
 
 
+footer { padding: 2.4rem 0 3rem; text-align: center; color: var(--muted); font-size: .92rem; border-top: 1px solid var(--border); }
+footer .logo { font-size: 1rem; display: inline-block; margin-bottom: .6rem; }
+
+/* ---------- Animations ---------- */
+@keyframes flow { to { background-position: -300% 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes blink { to { visibility: hidden; } }
+@keyframes floaty { 0%, 100% { transform: translateZ(60px) translateY(0); } 50% { transform: translateZ(60px) translateY(-9px); } }
+@keyframes sway {
+  0%, 100% { transform: rotateX(14deg) rotateY(-20deg); }
+  50% { transform: rotateX(6deg) rotateY(20deg); }
+}
+@keyframes candleIn { from { opacity: 0; transform: scaleY(.15) translateY(8px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.4rem; text-align: center; }
+  .avatar-wrap { order: -1; }
+  .bio { margin-inline: auto; }
+  .actions { justify-content: center; }
+  .typing { min-height: 3.2em; }
+  .contact-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
+  .chip3d.a { right: -2%; }
+  .chip3d.b { left: -2%; }
+}
+@media (max-width: 760px) {
+  .burger { display: grid; }
+  .menu {
+    position: absolute; top: calc(100% + 10px); left: 0; right: 0; flex-direction: column; gap: .2rem; padding: .7rem;
+    background: var(--glass-strong); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow);
+    opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .nav.open .menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .menu a { padding: .8rem 1rem; }
+  .menu a.active::after { left: 1rem; right: auto; width: 28px; }
+}
+@media (max-width: 480px) {
+  body { font-size: 1rem; }
+  .logo { font-size: 1rem; }
+  .chart-wrap { min-height: 280px; }
+  .price { font-size: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#about">Skip to content</a>
+<div class="orb o1" aria-hidden="true"></div>
+<div class="orb o2" aria-hidden="true"></div>
+<div class="orb o3" aria-hidden="true"></div>
 
-<div id="progress-bar"></div>
-<div class="glow-blob" id="blob1"></div>
-<div class="glow-blob" id="blob2"></div>
-<div class="grid-bg"></div>
-
-<!-- NAVBAR -->
-<nav class="reveal">
-  <a href="#home" class="nav-logo">⟨VIKASH/⟩</a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#cyber">Cyber Security</a></li>
-    <li><a href="#projects">Project</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <!-- DARK/LIGHT MODE TOGGLE -->
-  <div class="theme-switch-wrapper" onclick="toggleTheme()">
-    <div class="theme-switch"></div>
-    <span class="theme-label" id="theme-text">Dark On</span>
+<!-- ===== NAVBAR ===== -->
+<header class="nav" id="nav">
+  <a href="#home" class="logo" aria-label="Vikash Sahu, back to top">⟨VIKASH/⟩</a>
+  <div class="nav-right">
+    <nav aria-label="Main">
+      <ul class="menu" id="menu">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#trading">Trading</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="theme" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Switch between dark and light theme">
+      <span class="knob">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </span>
+    </button>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
-</nav>
+</header>
 
-<!-- HERO -->
-<section id="home">
-  <div class="profile-wrap reveal">
-    <div class="profile-rings"></div>
-    <!-- SPOT 1: GITHUB HERO IMAGE -->
-    <img class="profile-img float-anim" id="hero-img" src="https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg" alt="Vikash Sahu">
-  </div>
+<main id="main">
 
-  <div class="hero-greeting reveal" style="transition-delay: 0.1s;">⚡ WELCOME TO MY UNIVERSE</div>
-  <h1 class="hero-name reveal" style="transition-delay: 0.2s;">VIKASH SAHU</h1>
-
-  <div class="typing-wrap reveal" style="transition-delay: 0.3s;">
-    <span>Main banata hu</span>
-    <span id="typed-text"></span>
-  </div>
-
-  <p class="hero-bio reveal" style="transition-delay: 0.4s;">
-  Main <strong>AI aur Vibe Coding</strong> ka use karke high-level <strong>Web Applications</strong>, custom <strong>Android APKs</strong>, <strong>Automation Bots</strong>, aur <strong>Cyber Security Tools</strong> develop karta hoon.
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="hello">Namaste, I'm</p>
+      <h1 class="grad-name">VIKASH SAHU</h1>
+      <p class="typing" id="typingLine" aria-label="Main banata hu Android APKs, Web Apps, Telegram Bots, Trading Setup">
+        <span aria-hidden="true">Main banata hu </span><span class="typed" id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>
+      </p>
+      <p class="bio" style="color: var(--text);">
+  Main <strong>AI</strong> aur <strong>Vibe Coding</strong> ka use karke high-level <strong>Web Applications</strong>, custom <strong>Android APKs</strong>, <strong>Automation Bots</strong>, aur <strong>Cyber Security Tools</strong> develop karta hoon.
 </p>
 
 
-  <div class="hero-btns reveal" style="transition-delay: 0.5s;">
-    <!-- WhatsApp Auto Message Link -->
-    <a href="https://wa.me/917828510414?text=Hello%20Vikash,%20mujhe%20cyber%20crime%20aur%20security%20se%20judi%20kuch%20zaroori%20jankari%20chahiye." target="_blank" class="btn btn-primary">
-      💬 WhatsApp Pe Baat Karein
-    </a>
-    <button class="btn btn-outline" onclick="openModal()">🌐 Social Links</button>
-  </div>
 
-  <div class="social-row reveal" style="transition-delay: 0.6s;">
-    <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" class="social-icon si-ig" target="_blank" title="Instagram">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    </a>
-    <a href="https://wa.me/917828510414?text=Hello%20Vikash,%20mujhe%20cyber%20crime%20aur%20security%20se%20judi%20kuch%20zaroori%20jankari%20chahiye." class="social-icon si-wa" target="_blank" title="WhatsApp">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-    <a href="https://t.me/Vikashsahu07" class="social-icon si-tg" target="_blank" title="Telegram">
-      <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-    </a>
+
+
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact" data-tilt="8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Contact me
+        </a>
+        <a class="btn" href="#trading" data-tilt="8">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          View trading vibe
+        </a>
+      </div>
+    </div>
+
+    <div class="avatar-wrap" data-tilt="12">
+      <div class="ring-glow" aria-hidden="true"></div>
+      <div class="ring" aria-hidden="true"></div>
+      <div class="avatar">
+        <span class="initials" aria-hidden="true">VS</span>
+        <img src="https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg" alt="Portrait of Vikash Sahu" width="370" height="370" decoding="async" fetchpriority="high" referrerpolicy="no-referrer" onerror="this.style.display='none'">
+      </div>
+      <span class="chip3d a">Vibe Coder</span>
+      <span class="chip3d b">XAUUSD</span>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT SECTION -->
-<section id="about" class="section-pad">
-  <div class="section-title reveal">
-    <h2>Main Kya Banata Hu?</h2>
-    <div class="title-line"></div>
-    <p>VIBE CODING &amp; CREATION</p>
-  </div>
-  <div class="about-box">
-    <div class="about-text reveal-left">
-      <h3>⟨ Vibe Coding Se Digital Creation /⟩</h3>
-      <p>
-        Main <strong>Vibe Coding</strong> ke advanced tareeqe se complex se complex software, visual designs aur automation tools bohot fast generate aur test karta hoon. AI models ko precise logic provide karke direct production-ready output banata hoon.
-      </p>
-      <ul class="vibe-list">
-        <li class="reveal" style="transition-delay:0.1s"><span>⚡</span> Custom Android APKs</li>
-        <li class="reveal" style="transition-delay:0.2s"><span>🌐</span> Responsive Websites</li>
-        <li class="reveal" style="transition-delay:0.3s"><span>🐍</span> Python Automation Scripts</li>
-        <li class="reveal" style="transition-delay:0.4s"><span>🤖</span> Smart Telegram Bots</li>
-        <li class="reveal" style="transition-delay:0.5s"><span>📟</span> Termux Shell Tools</li>
-        <li class="reveal" style="transition-delay:0.6s"><span>🎨</span> Ultra-HD AI Posters</li>
-        <li class="reveal" style="transition-delay:0.7s"><span>🎬</span> Futuristic AI Videos</li>
-        <li class="reveal" style="transition-delay:0.8s"><span>🛡️</span> Cyber Crime Defense Tools</li>
-      </ul>
+<!-- ===== ABOUT / VIBE CODING ===== -->
+<section id="about">
+  <div class="container">
+    <div class="glass about-card" data-tilt="3">
+              <div class="glass about-card" data-tilt="3">
+      <h2>Vibe Coding aur Digital Creation</h2>
+      <p>Vibe coding mere kaam karne ka tareeqa hai: Pehle idea socho, AI ki madad se use shape do, aur fir har ek detail ko apne hathon se tab tak perfect karo jab tak wo ekdum premium na lagne lage. Is technique se main tezi se kaam karta hoon aur high-quality, responsive products ship karta hoon.</p>
+      <p>Chahe single-file web apps hon, Android APKs ya fir Telegram bots, mera poora focus clean design, smooth animations, aur ek aise code par hota hai jo kisi bhi device par makkhan ki tarah chale.</p>
     </div>
 
-<!-- PERSONAL PHOTOS SLIDER -->
-<div class="slider-container reveal-right" id="personal-slider">
-  <div class="slides-wrapper" id="slidesWrapper">
-    
-    <!-- 1st Photo -->
-    <div class="slide-item">
-      <img src="vikash-1.jpg" alt="Vikas Sahu Photo 1" class="photo-slide-img">
-    </div>
 
-    <!-- 2nd Photo -->
-    <div class="slide-item">
-      <img src="vikash-2.png" alt="Vikas Sahu Photo 2" class="photo-slide-img">
-    </div>
-
-  </div>
-
-  <div class="slider-nav">
-    <button class="slider-btn" onclick="slidePhoto(-1)">‹</button>
-    <button class="slider-btn" onclick="slidePhoto(1)">›</button>
-  </div>
-</div>
-</section>
-
-<!-- CYBER SECURITY -->
-<section id="cyber" class="section-pad">
-  <div class="section-title reveal">
-    <h2>Cyber Crime Threat Intel</h2>
-    <div class="title-line"></div>
-    <p>TOP 10 PRO TIPS &amp; HIDDEN DEFENSE</p>
-  </div>
-
-  <div class="cyber-slider-wrap reveal">
-    <div class="slider-container">
-      <div class="slide-counter" id="cyber-counter">1 / 10</div>
-      <div class="slides-wrapper" id="cyber-slides">
-        
-        <!-- Cyber Slide 1 -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=700&q=80" alt="EXIF Location Leak"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">METADATA EXPLOIT</span>
-              <h4>Photo EXIF Se Exact GPS Leak</h4>
-              <p>Camera se kheenchi gayi image me aapke latitude, longitude aur phone specs chupe hote hain. Publicly send karne par koi bhi bot aapka address plot kar leta hai.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Camera settings me "Save Location" band rakhein ya share karne se pehle screenshot lein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 2 -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80" alt="Screen Trojan"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">ANDROID ZERO-DAY VECTOR</span>
-              <h4>Accessibility Overlay Trojan</h4>
-              <p>Modded APK jab "Accessibility Service" allow karwata hai, to screen reading on ho jati hai. Aapka UPI PIN background me capture hota hai.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Kisi bhi unverified modded APK ko Accessibility permission na dein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 3 -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1618060932014-4deda4932554?auto=format&fit=crop&w=700&q=80" alt="Session Hijack"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">ACCOUNT HIJACKING</span>
-              <h4>Silent Cookie Theft (Bina OTP Hack)</h4>
-              <p>Malware aapke browser ke `Session Cookies` chura kar bina OTP ke WhatsApp Web aur Instagram open kar lete hain.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Monthly "Log out all sessions" karein aur unknown PC .exe files ko run na karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 4 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=700&q=80" alt="Juice Jacking"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">HARDWARE EXPLOIT</span>
-              <h4>Public USB Charging (Juice Jacking)</h4>
-              <p>Railway station ya airport par free USB charging port me hackers hidden chip laga dete hain. Cable lagate hi data transfer shuru ho jata hai.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Hamesha apna Powerbank ya direct wall adapter use karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 5 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=700&q=80" alt="QR Code Fraud"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">PAYMENT FRAUD</span>
-              <h4>QR Code Hijacking (Quishing)</h4>
-              <p>Public jagah (petrol pump/shops) par hackers real QR ke upar apna fake QR sticker chipka dete hain. Scan karte hi payment unke account me chali jati hai.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Scan karne ke baad Merchant Name screen par dhyan se verify karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 6 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&w=700&q=80" alt="AI Deepfake"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">SOCIAL ENGINEERING</span>
-              <h4>AI Voice Cloning & Deepfake</h4>
-              <p>Sirf 3 second ke audio se hacker aapke family member ki aawaz clone karke phone par emergency bata kar paise maangte hain.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Family ke sath ek "Secret Safe Word" banayein. Call par doubt ho to pooch lein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 7 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=700&q=80" alt="MitM Attack"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">NETWORK SNIFFING</span>
-              <h4>Free Public Wi-Fi Traps</h4>
-              <p>Hackers mall me "Free Wi-Fi" fake hotspot banate hain. Connect karte hi aapke passwords aur private activity unke paas chali jati hai (MitM Attack).</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Free Wi-Fi par banking app na kholein. Hamesha premium VPN use karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 8 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=700&q=80" alt="Bluebugging"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">WIRELESS ATTACK</span>
-              <h4>Bluetooth Sniffing (Bluebugging)</h4>
-              <p>Public me Bluetooth ON chhodne se hackers 10 meter ki range se aapke device me ghus kar messages padh sakte hain aur data chura sakte hain.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Earbuds use ke baad Bluetooth aur "Discoverable mode" hamesha OFF karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 9 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1510511459019-5d65495b14c8?auto=format&fit=crop&w=700&q=80" alt="Keylogger"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">MALWARE INFECTION</span>
-              <h4>Hidden Keyloggers & Fake Keyboards</h4>
-              <p>Free fancy keyboard apps aapke type kiye gaye har ek letter (passwords, chats) ko record karke remote server par bhejte hain.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Hamesha Gboard/Apple system keyboard use karein. Fancy fonts app avoid karein.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cyber Slide 10 (NEW) -->
-        <div class="slide-item">
-          <div class="cyber-slide-card">
-            <div class="cyber-slide-img-box"><img src="https://images.unsplash.com/photo-1629339942248-45d4b10c8c2f?auto=format&fit=crop&w=700&q=80" alt="SIM Swapping"></div>
-            <div class="cyber-slide-content">
-              <span class="cyber-tag">TELECOM FRAUD</span>
-              <h4>SIM Card Cloning & Swap</h4>
-              <p>Hacker aapki fake ID se telecom store ja kar naya SIM nikalwa lete hain. Purana SIM band hote hi banking OTP unhe aane lagte hain.</p>
-              <div class="pro-tip">🛡️ <strong>Solution:</strong> Agar network achanak gayab ho jaye to turant operator aur bank ko call karein.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="slider-nav">
-        <button class="slider-btn" onclick="slideCyber(-1)">‹</button>
-        <button class="slider-btn" onclick="slideCyber(1)">›</button>
+      <div class="skills" role="list">
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>Vibe Coding</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>Web Development</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span>Android APKs</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>Telegram Bots</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>Price Action Trading</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Cyber Security Awareness</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>UI/UX Design</div>
+        <div class="skill" role="listitem" data-tilt="7"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>AI Prompting</div>
       </div>
     </div>
-  </div>
-  
-  <!-- 🚨 IMPORTANT ALERT BOX (DATA BREACH CHECK) -->
-<div class="alert-box reveal">
-  <div class="alert-icon">⚠️</div>
-  <div class="alert-content">
-    <h4>DATA BREACH CHECK ALERT</h4>
-    <p>Kya aap janna chahte hain ki aapka <strong>Phone Number</strong> ya personal data internet (Dark Web) par leak hua hai ya nahi? Agar aap check karwana chahte hain ki aapke number se kya-kya information public ho chuki hai, toh mujhe WhatsApp par DM karein.</p>
-    
-    <a href="https://wa.me/917828510414?text=Hello%20Vikash,%20mujhe%20check%20karwana%20hai%20ki%20mera%20number%20ya%20data%20leak%20hua%20hai%20ya%20nahi." target="_blank" class="btn-alert">
-      💬 WhatsApp Par Check Karwayein
-    </a>
-    
-    <div class="alert-disclaimer">
-      <strong>🛑 STRICT DISCLAIMER:</strong> Main kisi bhi illegal ya galat kaam ko support nahi karta. Ye OSINT scan aur service sirf aapki personal privacy aur cyber security awareness ke liye hai, taaki aap apni leaked details ko secure kar sakein.Aap ke upar hai ki kya karna hai Ham Aap ko jabrdsti nahi bol rahe hai.
-    </div>
-  </div>
-</div>
 
-
-  <!-- INSTAGRAM CARD -->
-  <div class="insta-box reveal">
-    <div class="insta-left">
-      <div class="insta-avatar">
-        <img src="https://i.ibb.co/6Rp6XQG7/Snapchat-1098790970.jpg" alt="Instagram Profile">
-      </div>
-      <div>
-        <h4 style="color:var(--text-main); font-family:'Orbitron',monospace; font-size:1rem;">Follow Vikash On Instagram</h4>
-        <p style="color:var(--text-dim); font-size:0.85rem;">@_vikash_sahu__07 &bull; Direct DMs &amp; New Releases</p>
+    <div class="glass aware" data-tilt="3">
+      <h3>Cyber Security Awareness</h3>
+      <p>Simple habits that keep you and your accounts safe online.</p>
+      <div class="tips">
+        <div class="tip" data-tilt="6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Use strong, unique passwords</div>
+        <div class="tip" data-tilt="6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Turn on two-step verification</div>
+        <div class="tip" data-tilt="6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Verify links before you tap them</div>
       </div>
     </div>
-    <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" target="_blank" class="btn btn-primary" style="padding:10px 18px; font-size:0.7rem;">
-      Open Instagram ID &rarr;
-    </a>
+
+    <h3 class="gallery-title">Behind the Screen</h3>
+    <div class="gallery">
+      <figure class="glass shot" data-tilt="8">
+        <img src="vikash-1.jpg" alt="Vikash Sahu, photo one" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing')">
+        <span class="miss">Place vikash-1.jpg in the same folder as this file.</span>
+      </figure>
+      <figure class="glass shot" data-tilt="8">
+        <img src="vikash-2.png" alt="Vikash Sahu, photo two" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('missing')">
+        <span class="miss">Place vikash-2.png in the same folder as this file.</span>
+      </figure>
+    </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="section-pad">
-  <div class="section-title reveal">
-    <h2>Live Project</h2>
-    <div class="title-line"></div>
-    <p>FEATURED WORK</p>
-  </div>
-  <div class="project-container reveal">
-    <div class="project-card float-anim">
-      <div class="project-img-wrap">
-        <img src="https://i.ibb.co/q31Qq1pn/88ddaee8a964368b5c3757d6dc176d68.jpg" alt="Developer Card">
-      </div>
-      <div class="project-info">
-        <h3>Developer Card Dashboard</h3>
-        <p>Unified developer credential card and digital portfolio hub designed with glassmorphism layout.</p>
-        <a href="https://vshack999.github.io/Vikash-store-/Dev.html" target="_blank" class="btn btn-primary" style="width:100%; text-align:center;">⚡ Open Live Project</a>
-      </div>
+<!-- ===== TRADING ===== -->
+<section id="trading">
+  <div class="container">
+    <div class="sec-head">
+      <h2>XAUUSD Trading Vibe <small>(Market Uptrend Analysis)</small></h2>
+      <p>Price action and Smart Money Concepts on gold: reading market structure, marking demand zones and following the trend.</p>
     </div>
-  </div>
-  
-  <!-- 💻 COMPUTER CENTER WEBSITE PROJECT -->
-<div class="project-card reveal">
-  <div class="project-img-box">
-    <img src="computer-center.jpg" alt="Computer Center Website" class="project-img">
-  </div>
-  <div class="project-info">
-    <h3>Computer Center Website</h3>
-    <p>Students aur Institute management ke liye ek modern aur responsive web platform, jisme courses, admissions aur student details ka complete system hai.</p>
-    <div class="project-tags">
-      <span>HTML/CSS</span>
-      <span>JavaScript</span>
-      <span>Responsive UI</span>
-    </div>
-  </div>
-</div>
 
-<!-- 🔐 MY VAULT APK PROJECT -->
-<div class="project-card reveal">
-  <div class="project-img-box">
-    <img src="my-vault.png" alt="My Vault APK" class="project-img">
-  </div>
-  <div class="project-info">
-    <h3>My Vault APK</h3>
-    <p>Ek secure aur advanced Android application jo aapke personal data, media aur private files ko high-level encryption ke sath safe rakhti hai.</p>
-    <div class="project-tags">
-      <span>Android APK</span>
-      <span>Cyber Security</span>
-      <span>Encryption</span>
-    </div>
-  </div>
-</div>
+    <div class="stage3d"><div class="name3d">VIKASH SAHU</div></div>
 
+    <div class="glass terminal" data-tilt="2">
+      <div class="t-head">
+        <div class="t-left">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="sym">XAUUSD<small>Gold / US Dollar</small></div>
+          <span class="demo-tag">Animated demo</span>
+        </div>
+        <div class="t-right">
+          <span class="price" id="lastPx">0000.00</span>
+          <span class="chg" id="lastChg">+0.00%</span>
+          <div class="tfs" role="group" aria-label="Chart timeframe">
+            <button class="tf" type="button" data-tf="M15" aria-pressed="false">M15</button>
+            <button class="tf" type="button" data-tf="H1" aria-pressed="true">H1</button>
+            <button class="tf" type="button" data-tf="H4" aria-pressed="false">H4</button>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrap" id="chartHost">
+        <span class="badge">▲ Uptrend</span>
+        <svg id="chart" role="img" aria-label="Animated candlestick chart of gold showing an uptrend with higher highs, higher lows and a rising trendline"></svg>
+      </div>
+      <div class="t-stats">
+        <div><span>Bias</span><b>Bullish</b></div>
+        <div><span>Structure</span><b>Higher highs, higher lows</b></div>
+        <div><span>Key zone</span><b>Demand order block</b></div>
+        <div><span>Method</span><b>Price action + SMC</b></div>
+      </div>
+    </div>
+    <p class="note">Illustrative animation for education only. This is not financial advice.</p>
+  </div>
 </section>
 
-<!-- CONTACT SECTION -->
-<section id="contact" class="section-pad">
-  <div class="section-title reveal">
-    <h2>Contact Hub</h2>
-    <div class="title-line"></div>
-    <p>CONNECT DIRECTLY</p>
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head">
+      <h2>Contact Hub</h2>
+      <p>Have a project, a bot idea or a website to build? Send me a message on your favourite app.</p>
+    </div>
+    <div class="contact-grid">
+      <a class="cbtn wa" href="https://wa.me/917828510414?text=Hello%20Vikash%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener noreferrer" data-tilt="8">
+        <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 9.5c.4 2.3 2.3 4.4 5 5.3l1.6-1.4-1.9-1-.9.8c-.9-.4-1.6-1.1-2-2l.8-.9-1-1.9L9 9.500z"/></svg></span>
+        <div><b>WhatsApp</b><span>Chat with me</span></div>
+      </a>
+      <a class="cbtn tg" href="https://t.me/Vikashsahu07" target="_blank" rel="noopener noreferrer" data-tilt="8">
+        <span class="ci"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 3.9 18.6 19.5c-.25 1.1-.9 1.4-1.85.87l-5.1-3.75-2.45 2.37c-.27.27-.5.5-1.02.5l.37-5.2 9.45-8.53c.41-.37-.09-.57-.64-.2L6.7 12.9 1.7 11.34c-1.08-.34-1.1-1.08.23-1.6L20.4 2.6c.9-.33 1.7.2 1.5 1.3z"/></svg></span>
+        <div><b>Telegram</b><span>@Vikashsahu07</span></div>
+      </a>
+      <a class="cbtn ig" href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" target="_blank" rel="noopener noreferrer" data-tilt="8">
+        <span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span>
+        <div><b>Instagram</b><span>@_vikash_sahu__07</span></div>
+      </a>
+    </div>
   </div>
-  <div class="contact-wrap">
-<div class="contact-btns reveal">
-  
-  <!-- WhatsApp Button with Logo -->
-  <a href="https://wa.me/917828510414?text=Hello%20Vikash,%20mujhe%20cyber%20crime%20aur%20security%20se%20judi%20kuch%20zaroori%20jankari%20chahiye." target="_blank" class="contact-btn btn-wa">
-    <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor; margin-right:8px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    WhatsApp (Direct Info)
-  </a>
-  
-  <!-- Telegram Button with Logo -->
-  <a href="https://t.me/Vikashsahu07" target="_blank" class="contact-btn btn-tg">
-    <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor; margin-right:8px;"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-    Telegram (@Vikashsahu07)
-  </a>
-  
-  <!-- Instagram Button with Logo -->
-  <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" target="_blank" class="contact-btn btn-ig">
-    <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor; margin-right:8px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    Instagram
-  </a>
+</section>
 
-</div>
+</main>
 
-
-
-    <!-- 🛡️ CRITICAL SECURITY & LEGAL DISCLAIMER (HINDI) -->
-<div class="warning-note reveal">
-  <div class="notice-header">
-    <span class="notice-icon">⚠️</span>
-    <strong>CRITICAL SECURITY &amp; LEGAL NOTICE</strong>
-  </div>
-  <p>
-    Yeh website <strong>Vikash Sahu</strong> ke dwara modern AI-assisted <em>Vibe Coding</em> techniques ka use karke banayi gayi hai. Is website aur is par di gayi sabhi cyber crime tips ka mukhya uddeshya sirf <strong>education, defensive awareness aur cyber security learning</strong> hai. Kisi bhi tarah ke galat, illegal ya unauthorized kaam ke liye iska upyog karna poori tarah se ban (strictly prohibited) hai.
-  </p>
-</div>
-
-
-
-<!-- FOOTER -->
 <footer>
-  © 2026 Vikash Sahu. Built with Cyberpunk Vibe Coding &amp; Pure CSS.
+  <div class="container">
+    <a href="#home" class="logo" aria-label="Back to top">⟨VIKASH/⟩</a>
+    <p>&copy; <span id="year">2026</span> Vikash Sahu. Built with vibe coding.</p>
+  </div>
 </footer>
 
-<!-- MODAL -->
-<div id="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h2 style="font-family:'Orbitron',monospace; font-size:1rem; color:var(--neon-blue);">🌐 Social Profiles</h2>
-    <div class="modal-links">
-      <a href="https://www.instagram.com/_vikash_sahu__07?igsh=MXV6ZjVuMTZxOHVudQ==" class="modal-link" target="_blank">
-        ❤️‍🔥 <div><strong>Instagram</strong><br><small style="color:var(--text-dim)">@_vikash_sahu__07</small></div>
-      </a>
-      <a href="https://t.me/Vikashsahu07" class="modal-link" target="_blank">
-        📱 <div><strong>Telegram</strong><br><small style="color:var(--text-dim)">@Vikashsahu07</small></div>
-      </a>
-    </div>
-  </div>
-</div>
-
 <script>
-// ─── SCROLL REVEAL ANIMATIONS ───
-const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-const revealObserver = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(entry => {
-    if(!entry.isIntersecting) return;
-    entry.target.classList.add('active');
-    observer.unobserve(entry.target);
-  });
-}, revealOptions);
-reveals.forEach(reveal => revealObserver.observe(reveal));
+(function () {
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
 
-// ─── TYPING EFFECT ───
-const typingTexts = ["Android APKs","Termux Tools","Python Bots","Telegram Bots","AI Posters","Cyber Security Tools"];
-let ti=0,ci=0,del=false;
-const typed=document.getElementById('typed-text');
-function type(){
-  const w=typingTexts[ti];
-  if(!del){typed.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1200);return;}}
-  else{typed.textContent=w.slice(0,--ci);if(ci===0){del=false;ti=(ti+1)%typingTexts.length;}}
-  setTimeout(type,del?60:100);
-}
-type();
+  /* ---------- Year ---------- */
+  var yEl = document.getElementById('year');
+  if (yEl) { yEl.textContent = String(new Date().getFullYear()); }
 
-// ─── THEME TOGGLE (ON/OFF SWITCH) ───
-const themeText = document.getElementById('theme-text');
-function toggleTheme(){
-  const cur = document.documentElement.getAttribute('data-theme');
-  const next = cur === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  themeText.innerText = next === 'dark' ? 'Dark On' : 'Light On';
-}
-const saved = localStorage.getItem('theme');
-if(saved) {
-  document.documentElement.setAttribute('data-theme', saved);
-  themeText.innerText = saved === 'dark' ? 'Dark On' : 'Light On';
-}
-
-// ─── SCROLL PROGRESS BAR ───
-window.addEventListener('scroll',()=>{
-  const s=document.documentElement;
-  const pct=(s.scrollTop/(s.scrollHeight-s.clientHeight))*100;
-  document.getElementById('progress-bar').style.width=pct+'%';
-});
-
-// ─── SLIDER 1: PERSONAL PHOTOS ───
-let photoIdx = 0;
-const photoWrapper = document.getElementById('photo-slides');
-const totalPhotos = photoWrapper.children.length;
-function slidePhoto(dir){
-  photoIdx = (photoIdx + dir + totalPhotos) % totalPhotos;
-  photoWrapper.style.transform = `translateX(-${photoIdx * 100}%)`;
-}
-
-
-// ─── SLIDER 2: CYBER CRIME ───
-let cyberIdx = 0;
-const cyberWrapper = document.getElementById('cyber-slides');
-const totalCyber = cyberWrapper.children.length;
-const cyberCounter = document.getElementById('cyber-counter');
-function slideCyber(dir){
-  cyberIdx = (cyberIdx + dir + totalCyber) % totalCyber;
-  cyberWrapper.style.transform = `translateX(-${cyberIdx * 100}%)`;
-  cyberCounter.innerText = `${cyberIdx + 1} / ${totalCyber}`;
-}
-
-// ─── MODAL CONTROLS ───
-function openModal(){document.getElementById('modal-overlay').classList.add('open');}
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
-function closeModalOutside(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
-
-// ─── DEFENSIVE KEYBOARD & CONTEXT LOCKS (SECURITY) ───
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
-    e.preventDefault();
+  /* ---------- Theme toggle ---------- */
+  var themeBtn = document.getElementById('themeBtn');
+  var metaTheme = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(t, save) {
+    root.setAttribute('data-theme', t);
+    themeBtn.setAttribute('aria-checked', t === 'light' ? 'true' : 'false');
+    if (metaTheme) { metaTheme.setAttribute('content', t === 'light' ? '#f2f5ff' : '#030014'); }
+    if (save) { try { localStorage.setItem('vk-theme', t); } catch (e) { /* ignore */ } }
   }
-});
+  applyTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark', false);
+  themeBtn.addEventListener('click', function () {
+    applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light', true);
+  });
+
+  /* ---------- Mobile menu ---------- */
+  var nav = document.getElementById('nav');
+  var burger = document.getElementById('burger');
+  function setMenu(open) {
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+  document.querySelectorAll('#menu a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); } });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) { setMenu(false); } });
+
+  /* ---------- Active nav link ---------- */
+  var links = document.querySelectorAll('#menu a');
+  if ('IntersectionObserver' in window) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          links.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id); });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['home', 'about', 'trading', 'contact'].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (s) { secObs.observe(s); }
+    });
+  }
+
+  /* ---------- Typing effect ---------- */
+  var items = ['Android APKs', 'Web Apps', 'Telegram Bots', 'Trading Setup'];
+  var typed = document.getElementById('typed');
+  if (reduce) {
+    typed.textContent = items.join(', ');
+  } else {
+    var wi = 0, ci = 0, deleting = false;
+    (function tick() {
+      var word = items[wi];
+      typed.textContent = word.slice(0, ci);
+      var delay;
+      if (!deleting) {
+        if (ci < word.length) { ci++; delay = 85; } else { deleting = true; delay = 1400; }
+      } else {
+        if (ci > 0) { ci--; delay = 45; } else { deleting = false; wi = (wi + 1) % items.length; delay = 350; }
+      }
+      setTimeout(tick, delay);
+    })();
+  }
+
+  /* ---------- 3D tilt (mouse and pen only) ---------- */
+  var canTilt = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce;
+  if (canTilt) {
+    document.querySelectorAll('[data-tilt]').forEach(function (el) {
+      var max = parseFloat(el.getAttribute('data-tilt')) || 8;
+      var raf = 0;
+      el.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch') { return; }
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(function () {
+          el.style.setProperty('--rx', ((0.5 - py) * max * 2).toFixed(2) + 'deg');
+          el.style.setProperty('--ry', ((px - 0.5) * max * 2).toFixed(2) + 'deg');
+          el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+          el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+        });
+      });
+      el.addEventListener('pointerleave', function () {
+        cancelAnimationFrame(raf);
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+
+  /* ---------- XAUUSD candlestick terminal ---------- */
+  var host = document.getElementById('chartHost');
+  var svg = document.getElementById('chart');
+  var pxEl = document.getElementById('lastPx');
+  var chgEl = document.getElementById('lastChg');
+  var tfBtns = document.querySelectorAll('.tf');
+  var TF = {
+    M15: { seed: 11, vol: 3.0, f: 1 },
+    H1:  { seed: 29, vol: 5.2, f: 0.88 },
+    H4:  { seed: 47, vol: 8.5, f: 0.74 }
+  };
+  var curTf = 'H1', started = false, inView = false, lastW = 0, liveTimer = null, ctx = null;
+
+  function rng(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function fmt(v) { return v.toFixed(2); }
+
+  function generate(n, cfg) {
+    var r = rng(cfg.seed * 100 + n);
+    var p = 3380 + (cfg.seed % 7) * 3, out = [], v = cfg.vol;
+    for (var i = 0; i < n; i++) {
+      var o = p, up = r() < 0.7, body = v * (0.35 + r() * 1.0);
+      var c = o + (up ? body * 1.1 : -body * 0.75) + v * 0.2;
+      var h = Math.max(o, c) + r() * v * 0.75;
+      var l = Math.min(o, c) - r() * v * 0.75;
+      var vol = Math.min(1, 0.22 + (Math.abs(c - o) / (v * 1.7)) * 0.5 + r() * 0.28);
+      out.push({ o: o, h: h, l: l, c: c, v: vol });
+      p = c;
+    }
+    return out;
+  }
+
+  function stopLive() { if (liveTimer) { clearInterval(liveTimer); liveTimer = null; } }
+
+  function render() {
+    stopLive();
+    var cfg = TF[curTf];
+    var W = Math.max(300, Math.floor(host.clientWidth - 8)) || 900;
+    lastW = host.clientWidth;
+    var small = W < 520, mid = W < 760;
+    var H = small ? 350 : (mid ? 410 : 470);
+    var axis = small ? 56 : 70;
+    var n = Math.round((small ? 24 : (mid ? 32 : 44)) * cfg.f);
+    var L = 8, R = W - axis, T = 22, B = H - 64, VT = B + 12, VB = H - 8;
+    var cs = generate(n, cfg);
+    var yMax = -Infinity, yMin = Infinity, i, k;
+    for (i = 0; i < n; i++) { yMax = Math.max(yMax, cs[i].h); yMin = Math.min(yMin, cs[i].l); }
+    var pad = (yMax - yMin) * 0.09; yMax += pad; yMin -= pad;
+    var slot = (R - L) / n, bw = Math.max(4, slot * 0.62);
+    function Y(p) { return T + ((yMax - p) / (yMax - yMin)) * (B - T); }
+    function X(idx) { return L + slot * (idx + 0.5); }
+
+    /* trendline: least squares slope through lows, shifted to touch the lowest low */
+    var mx = (n - 1) / 2, my = 0, num = 0, den = 0;
+    for (i = 0; i < n; i++) { my += cs[i].l; } my /= n;
+    for (i = 0; i < n; i++) { num += (i - mx) * (cs[i].l - my); den += (i - mx) * (i - mx); }
+    var slope = den ? num / den : 0, icpt = Infinity, icpt2 = -Infinity;
+    for (i = 0; i < n; i++) {
+      icpt = Math.min(icpt, cs[i].l - slope * i);
+      icpt2 = Math.max(icpt2, cs[i].h - slope * i);
+    }
+    var iA = -0.3, iB = n - 1 + 0.4;
+    var xA = X(iA), xB = X(iB);
+    var yA = Y(icpt + slope * iA), yB = Y(icpt + slope * iB);
+    var yA2 = Y(icpt2 + slope * iA), yB2 = Y(icpt2 + slope * iB);
+
+    var s = '';
+    s += '<defs>' +
+      '<linearGradient id="gUp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--up)"/><stop offset="1" style="stop-color:var(--up);stop-opacity:.55"/></linearGradient>' +
+      '<linearGradient id="gDn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--dn)"/><stop offset="1" style="stop-color:var(--dn);stop-opacity:.55"/></linearGradient>' +
+      '<linearGradient id="gTrend" x1="0" y1="1" x2="1" y2="0"><stop offset="0" style="stop-color:var(--c2)"/><stop offset=".55" style="stop-color:var(--c1)"/><stop offset="1" style="stop-color:var(--up)"/></linearGradient>' +
+      '<linearGradient id="gChan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--c1);stop-opacity:.10"/><stop offset="1" style="stop-color:var(--c2);stop-opacity:.02"/></linearGradient>' +
+      '<filter id="glowSoft" filterUnits="userSpaceOnUse" x="0" y="0" width="' + W + '" height="' + H + '"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+      '<filter id="glowStrong" filterUnits="userSpaceOnUse" x="0" y="0" width="' + W + '" height="' + H + '"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+      '<clipPath id="plotClip"><rect x="' + L + '" y="' + (T - 6) + '" width="' + (R - L) + '" height="' + (B - T + 12) + '"/></clipPath>' +
+      '</defs>';
+
+    /* grid + price axis */
+    for (k = 0; k <= 5; k++) {
+      var gy = T + ((B - T) * k) / 5, gp = yMax - ((yMax - yMin) * k) / 5;
+      s += '<line class="grid" x1="' + L + '" x2="' + R + '" y1="' + gy.toFixed(1) + '" y2="' + gy.toFixed(1) + '"/>';
+      s += '<text class="ax" x="' + (R + 8) + '" y="' + (gy + 3.5).toFixed(1) + '">' + fmt(gp) + '</text>';
+    }
+    for (i = 3; i < n; i += 6) {
+      s += '<line class="grid" x1="' + X(i).toFixed(1) + '" x2="' + X(i).toFixed(1) + '" y1="' + T + '" y2="' + VB + '"/>';
+    }
+    s += '<line class="axisline" x1="' + R + '" x2="' + R + '" y1="' + T + '" y2="' + VB + '"/>';
+    s += '<text class="ax" x="' + (R + 8) + '" y="' + (VT + 10) + '">VOL</text>';
+
+    /* SMC zones */
+    var i1 = 0, lo = Infinity;
+    for (i = 0; i < Math.floor(n * 0.5); i++) { if (cs[i].l < lo) { lo = cs[i].l; i1 = i; } }
+    var obX1 = X(i1) - bw / 2, obX2 = X(Math.min(n - 1, i1 + 11)) + bw / 2;
+    var obTop = Y(cs[i1].h), obBot = Y(cs[i1].l);
+    s += '<g class="fx" style="animation-delay:1.3s"><rect class="z-ob" x="' + obX1.toFixed(1) + '" y="' + obTop.toFixed(1) + '" width="' + (obX2 - obX1).toFixed(1) + '" height="' + Math.max(6, obBot - obTop).toFixed(1) + '" rx="3"/>' +
+         '<text class="zl" style="fill:var(--c1)" x="' + (obX1 + 5).toFixed(1) + '" y="' + Math.min(B - 4, obBot + 13).toFixed(1) + '">Demand OB</text></g>';
+
+    var i2 = -1;
+    for (k = Math.floor(n * 0.45); k < Math.floor(n * 0.85); k++) {
+      if (cs[k + 1] && cs[k + 1].l > cs[k - 1].h) { i2 = k; break; }
+    }
+    if (i2 > 0) {
+      var fx1 = X(i2 - 1) - bw / 2, fx2 = X(Math.min(n - 1, i2 + 7)) + bw / 2;
+      var fTop = Y(cs[i2 + 1].l), fBot = Y(cs[i2 - 1].h);
+      s += '<g class="fx" style="animation-delay:1.6s"><rect class="z-fvg" x="' + fx1.toFixed(1) + '" y="' + fTop.toFixed(1) + '" width="' + (fx2 - fx1).toFixed(1) + '" height="' + Math.max(5, fBot - fTop).toFixed(1) + '" rx="3"/>' +
+           '<text class="zl" style="fill:var(--c2)" x="' + (fx1 + 5).toFixed(1) + '" y="' + Math.max(T + 10, fTop - 5).toFixed(1) + '">FVG</text></g>';
+    }
+
+    var i3 = 0, hi = -Infinity;
+    for (i = 0; i < Math.floor(n * 0.6); i++) { if (cs[i].h > hi) { hi = cs[i].h; i3 = i; } }
+    var j3 = -1;
+    for (i = i3 + 1; i < n; i++) { if (cs[i].c > cs[i3].h) { j3 = i; break; } }
+    if (j3 > 0) {
+      var by = Y(cs[i3].h);
+      s += '<g class="fx" style="animation-delay:1.9s"><line class="bos" x1="' + X(i3).toFixed(1) + '" x2="' + (X(j3) + slot).toFixed(1) + '" y1="' + by.toFixed(1) + '" y2="' + by.toFixed(1) + '"/>' +
+           '<text class="zl" style="fill:var(--c3)" x="' + ((X(i3) + X(j3)) / 2).toFixed(1) + '" y="' + Math.max(T + 10, by - 6).toFixed(1) + '">BOS</text></g>';
+    }
+
+    /* channel between support and resistance trend lines */
+    s += '<g clip-path="url(#plotClip)"><g class="fx" style="animation-delay:1.1s">' +
+         '<polygon class="chan" points="' + xA.toFixed(1) + ',' + yA.toFixed(1) + ' ' + xB.toFixed(1) + ',' + yB.toFixed(1) + ' ' + xB.toFixed(1) + ',' + yB2.toFixed(1) + ' ' + xA.toFixed(1) + ',' + yA2.toFixed(1) + '"/>' +
+         '<line class="chan-line" x1="' + xA.toFixed(1) + '" y1="' + yA2.toFixed(1) + '" x2="' + xB.toFixed(1) + '" y2="' + yB2.toFixed(1) + '"/></g></g>';
+
+    /* volume bars */
+    for (i = 0; i < n; i++) {
+      var c = cs[i], up = c.c >= c.o, vh = Math.max(2, (VB - VT) * c.v);
+      s += '<rect class="vb ' + (up ? 'up' : 'dn') + '" style="animation-delay:' + (i * 45) + 'ms" x="' + (X(i) - bw / 2).toFixed(1) + '" y="' + (VB - vh).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + vh.toFixed(1) + '" rx="1.5"/>';
+    }
+
+    /* candles */
+    s += '<g filter="url(#glowSoft)">';
+    for (i = 0; i < n; i++) {
+      var d = cs[i], isUp = d.c >= d.o, top = Y(Math.max(d.o, d.c)), bh = Math.max(1.6, Math.abs(Y(d.o) - Y(d.c)));
+      s += '<g class="cd ' + (isUp ? 'up' : 'dn') + '" style="animation-delay:' + (i * 45) + 'ms">' +
+           '<line x1="' + X(i).toFixed(1) + '" x2="' + X(i).toFixed(1) + '" y1="' + Y(d.h).toFixed(1) + '" y2="' + Y(d.l).toFixed(1) + '"/>' +
+           '<rect x="' + (X(i) - bw / 2).toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" rx="1.5"/></g>';
+    }
+    s += '</g>';
+
+    /* glowing diagonal trendline */
+    s += '<g clip-path="url(#plotClip)"><path class="trend" pathLength="1" filter="url(#glowStrong)" d="M' + xA.toFixed(1) + ' ' + yA.toFixed(1) + ' L' + xB.toFixed(1) + ' ' + yB.toFixed(1) + '"/></g>';
+    s += '<g class="fx" style="animation-delay:2.7s"><circle class="tdot" cx="' + xB.toFixed(1) + '" cy="' + yB.toFixed(1) + '" r="4" filter="url(#glowStrong)"/>';
+    if (!reduce) {
+      s += '<circle cx="' + xB.toFixed(1) + '" cy="' + yB.toFixed(1) + '" r="4" fill="none" style="stroke:var(--up)" stroke-width="1.5">' +
+           '<animate attributeName="r" values="4;14;4" dur="2.2s" repeatCount="indefinite"/>' +
+           '<animate attributeName="opacity" values=".9;0;.9" dur="2.2s" repeatCount="indefinite"/></circle>';
+    }
+    s += '</g>';
+
+    /* live price line + tag */
+    var last = cs[n - 1], ly = Y(last.c);
+    s += '<line id="plLine" class="pl ' + (last.c >= last.o ? '' : 'dn') + '" x1="' + L + '" x2="' + R + '" y1="' + ly.toFixed(1) + '" y2="' + ly.toFixed(1) + '"/>';
+    s += '<g id="plTag" class="tag ' + (last.c >= last.o ? '' : 'dn') + '"><rect x="' + (R + 1) + '" y="' + (ly - 10).toFixed(1) + '" width="' + (axis - 3) + '" height="20" rx="4"/>' +
+         '<text x="' + (R + 6) + '" y="' + (ly + 3.5).toFixed(1) + '">' + fmt(last.c) + '</text></g>';
+
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+    svg.setAttribute('class', '');
+    svg.innerHTML = s;
+    if (started || reduce) { void svg.getBoundingClientRect(); svg.setAttribute('class', 'play'); }
+
+    ctx = {
+      cs: cs, n: n, cfg: cfg, Y: Y, yMin: yMin, yMax: yMax, pad: pad, R: R, axis: axis, c0: last.c, first: cs[0].o,
+      lastG: svg.querySelectorAll('.cd')[n - 1],
+      line: svg.querySelectorAll('.cd')[n - 1].querySelector('line'),
+      body: svg.querySelectorAll('.cd')[n - 1].querySelector('rect'),
+      pl: svg.getElementById ? svg.getElementById('plLine') : document.getElementById('plLine'),
+      tag: document.getElementById('plTag')
+    };
+    paintHeader();
+    if (!reduce) { liveTimer = setInterval(tick, 1100); }
+  }
+
+  function paintHeader() {
+    if (!ctx) { return; }
+    var c = ctx.cs[ctx.n - 1], pct = ((c.c - ctx.first) / ctx.first) * 100, up = c.c >= c.o;
+    pxEl.textContent = fmt(c.c);
+    pxEl.classList.toggle('dn', !up);
+    chgEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+    chgEl.classList.toggle('dn', pct < 0);
+  }
+
+  function paintLast() {
+    var d = ctx.cs[ctx.n - 1], Y = ctx.Y, up = d.c >= d.o;
+    var top = Y(Math.max(d.o, d.c)), bh = Math.max(1.6, Math.abs(Y(d.o) - Y(d.c)));
+    ctx.line.setAttribute('y1', Y(d.h).toFixed(1));
+    ctx.line.setAttribute('y2', Y(d.l).toFixed(1));
+    ctx.body.setAttribute('y', top.toFixed(1));
+    ctx.body.setAttribute('height', bh.toFixed(1));
+    ctx.lastG.setAttribute('class', 'cd ' + (up ? 'up' : 'dn'));
+    var ly = Y(d.c);
+    ctx.pl.setAttribute('y1', ly.toFixed(1));
+    ctx.pl.setAttribute('y2', ly.toFixed(1));
+    ctx.pl.setAttribute('class', 'pl ' + (up ? '' : 'dn'));
+    ctx.tag.setAttribute('class', 'tag ' + (up ? '' : 'dn'));
+    ctx.tag.querySelector('rect').setAttribute('y', (ly - 10).toFixed(1));
+    var tx = ctx.tag.querySelector('text');
+    tx.setAttribute('y', (ly + 3.5).toFixed(1));
+    tx.textContent = fmt(d.c);
+    paintHeader();
+  }
+
+  function tick() {
+    if (!ctx || document.hidden || !inView) { return; }
+    var d = ctx.cs[ctx.n - 1], v = ctx.cfg.vol;
+    var step = (Math.random() - 0.5) * v * 0.55 + (ctx.c0 - d.c) * 0.12;
+    var nc = Math.min(ctx.yMax - ctx.pad * 0.4, Math.max(ctx.yMin + ctx.pad * 0.4, d.c + step));
+    d.c = nc; d.h = Math.max(d.h, nc); d.l = Math.min(d.l, nc);
+    paintLast();
+  }
+
+  tfBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = b.getAttribute('data-tf');
+      if (!TF[t] || t === curTf) { return; }
+      curTf = t;
+      tfBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      render();
+    });
+  });
+
+  var rz = 0;
+  window.addEventListener('resize', function () {
+    clearTimeout(rz);
+    rz = setTimeout(function () { if (Math.abs(host.clientWidth - lastW) >= 24) { render(); } }, 220);
+  });
+
+  render();
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        inView = en.isIntersecting;
+        if (inView && !started) { started = true; svg.setAttribute('class', 'play'); }
+      });
+    }, { threshold: 0.25 }).observe(host);
+  } else {
+    started = true; inView = true; svg.setAttribute('class', 'play');
+  }
+})();
 </script>
 </body>
 </html>
